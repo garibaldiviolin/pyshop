@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 
@@ -16,4 +17,14 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=3)
 
 
-# class PurchaseOrder(models.Model):
+class PurchaseOrder(models.Model):
+
+    receipt_id = models.CharField(unique=True, max_length=20)
+    timestamp = models.DateTimeField()
+    customer = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+
+
+# class PurchaseItem(models.Model):
