@@ -12,19 +12,54 @@ class Product(models.Model):
     '''
 
     barcode = models.CharField(primary_key=True, max_length=20)
-    title = models.TextArea()
-    description = models.TextArea()
+    title = models.TextField()
+    description = models.TextField()
+    image = models.ImageField()
     price = models.DecimalField(max_digits=8, decimal_places=3)
+
+    def __unicode__(self):
+        return self.title
+
+
+class PaymentMethod(models.Model):
+
+    description = models.CharField(unique=True, max_length=50)
+
+    def __unicode__(self):
+        return self.description
 
 
 class PurchaseOrder(models.Model):
 
-    receipt_id = models.CharField(unique=True, max_length=20)
     timestamp = models.DateTimeField()
     customer = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
 
+    def __unicode__(self):
+        return str(self.timestamp) + self.customer.name
 
-# class PurchaseItem(models.Model):
+
+class PurchaseItem(models.Model):
+
+    purchase_order = models.ForeignKey(PurchaseOrder, on_delete=models.CASCADE)
+    barcode = models.CharField(primary_key=True, max_length=20)
+    title = models.TextField()
+    description = models.TextField()
+    price = models.DecimalField(max_digits=8, decimal_places=3)
+
+    def __unicode__(self):
+        return str(self.id)
+
+
+class PurchasePaymentMethod(models.Model):
+
+    purchase_order = models.ForeignKey(PurchaseOrder, on_delete=models.CASCADE)
+    payment_method = models.ForeignKey(
+        PaymentMethod, on_delete=models.PROTECT
+    )
+    value = models.DecimalField(max_digits=8, decimal_places=3)
+
+    def __unicode__(self):
+        return str(self.id)
