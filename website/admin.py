@@ -1,3 +1,14 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Product, PaymentMethod, PurchaseOrder, PurchaseItem, \
+    PurchasePaymentMethod
+
+
+admin_models = [
+    Product, PaymentMethod, PurchaseOrder,
+    PurchaseItem, PurchasePaymentMethod
+]
+
+
+for item in admin_models:
+    admin.site.register(item)
