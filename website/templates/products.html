@@ -1,0 +1,16 @@
+<html>
+<head>
+	Products List
+</head>
+<body>
+	<h1>Products List</h1>
+	{% for product in product_list %}
+		{{ product.id }}<br/>
+		{{ product.title }}<br/>
+		{{ product.description }}<br/>
+		<img src='{{ product.image.url }}' />
+		{{ product.price }}<br/>
+
+	{% endfor %}
+</body>
+</html>
