@@ -1,16 +1,19 @@
 <html>
 <head>
-	Products List
+	<title>Products List</title>
 </head>
 <body>
+	<hr/>
 	<h1>Products List</h1>
 	{% for product in product_list %}
-		{{ product.id }}<br/>
-		{{ product.title }}<br/>
-		{{ product.description }}<br/>
-		<img src='{{ product.image.url }}' />
-		{{ product.price }}<br/>
-
+		<center>
+			ID: {{ product.id }}<br/>
+			Title: {{ product.title }}<br/>
+			Description: {{ product.description }}<br/>
+			<img src='{{ product.image.url }}' /><br/>
+			Price: US$ {{ product.price }}<br/>
+			<hr/>
+		</center>
 	{% endfor %}
 </body>
 </html>
