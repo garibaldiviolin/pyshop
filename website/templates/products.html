@@ -1,24 +1,3 @@
-<html>
-<head>
-	<title>Products List</title>
-</head>
-<body>
-	<form action="{% url 'website:index' %}">
-		<label for="q">Search</label>
-		<input type="text" name="q" id="q">
-		<input type="submit" value="submit">
-	</form>
-	<hr/>
-	<h1>Products List</h1>
-	{% for product in product_list %}
-		<center>
-			ID: {{ product.id }}<br/>
-			Title: {{ product.title }}<br/>
-			Description: {{ product.description }}<br/>
-			<img src='{{ product.image.url }}' /><br/>
-			Price: US$ {{ product.price }}<br/>
-			<hr/>
-		</center>
-	{% endfor %}
-</body>
-</html>
+{% extends 'base.html' %}
+<hr/>
+{% block title %}Products List{% endblock title %}

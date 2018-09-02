@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+	{% block title %}
+		PyShop
+	{% endblock title %}
+	</title>
+</head>
+<body>
+	{% if authenticated_user %}
+		Usuario: {{ authenticated_user }}
+	{% else %}
+		<form action="{% url 'website:login' %}" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<label for="username">Login:</label>
+			<input type="text" name="username" id="username">
+			<label for="password">Password:</label>
+			<input type="password" name="password" id="password">
+			<input type="submit" name="submit" value="Login">
+		</form>
+	{% endif %}
+	<hr/>
+	<form action="{% url 'website:index' %}">
+		<label for="q">Search</label>
+		<input type="text" name="q" id="q">
+		<input type="submit" value="submit">
+	</form>
+	{% block content %}
+		<hr/>
+		<center>
+		<h1>Products List</h1>
+		{% for product in product_list %}
+			ID: {{ product.id }}<br/>
+			Title: {{ product.title }}<br/>
+			Description: {{ product.description }}<br/>
+			<img src='{{ product.image.url }}' /><br/>
+			Price: US$ {{ product.price }}<br/>
+			<hr/>
+		{% endfor %}
+		</center>
+	{% endblock content%}
+</body>
+</html>
