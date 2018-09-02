@@ -3,6 +3,11 @@
 	<title>Products List</title>
 </head>
 <body>
+	<form action="{% url 'website:index' %}">
+		<label for="q">Search</label>
+		<input type="text" name="q" id="q">
+		<input type="submit" value="submit">
+	</form>
 	<hr/>
 	<h1>Products List</h1>
 	{% for product in product_list %}
