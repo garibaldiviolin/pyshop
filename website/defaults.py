@@ -14,11 +14,11 @@ product_list = [
     ),
     Product(
         '2012345012349', 'Wardrobe', 'Lorem ipsum',
-        'wardrobe.jpeg', 55.990, category_list[0].id
+        'wardrobe.jpeg', 55.990, category_list[1].id
     ),
     Product(
         '5901234123457', 'Mattress', 'Lorem ipsum',
-        'mattress.jpg', 800.724, category_list[0].id
+        'mattress.jpg', 800.724, category_list[1].id
     )
 ]
 
