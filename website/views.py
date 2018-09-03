@@ -1,7 +1,5 @@
-import pdb
-
 from django.contrib.auth import authenticate, login
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import ListView, View
 from django.db.models import Q
 
@@ -38,14 +36,14 @@ class LoginView(View):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        pdb.set_trace()
+        previous_url = request.META.get('HTTP_REFERER')
 
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return HttpResponse('Hello, ' + username + '!')
+                return HttpResponseRedirect(previous_url)
             else:
-                return HttpResponse('Your account has been disabled')
+                return HttpResponse('User is inactive')
         else:
             return HttpResponse('Invalid login')
