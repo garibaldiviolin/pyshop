@@ -2,6 +2,14 @@ from django.conf import settings
 from django.db import models
 
 
+class Category(models.Model):
+
+    description = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return self.description
+
+
 class Product(models.Model):
     '''
     - The barcode length was chosen considering that usual products come with
@@ -16,6 +24,7 @@ class Product(models.Model):
     description = models.TextField()
     image = models.ImageField()
     price = models.DecimalField(max_digits=8, decimal_places=3)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return self.title
