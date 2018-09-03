@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import ListView, View
 from django.db.models import Q
@@ -44,11 +45,11 @@ class LoginView(View):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return HttpResponseRedirect(previous_url)
             else:
-                return HttpResponse('User is inactive')
+                messages.error(request, 'User is inactive')
         else:
-            return HttpResponse('Invalid login')
+            messages.error(request, 'Invalid login')
+        return HttpResponseRedirect(previous_url)
 
 
 class LogoutView(View):
