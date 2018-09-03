@@ -9,7 +9,11 @@
 </head>
 <body>
 	{% if authenticated_user %}
-		Usuario: {{ authenticated_user }}
+		<form action="/logout" method="post">
+			Usuario: {{ authenticated_user }}
+			<input type="hidden" name="username" value="{{ authenticated_user }}">
+			<input type="submit" name="submit" value="Logout">
+		</form>
 	{% else %}
 		<form action="{% url 'website:login' %}" method="post" enctype="multipart/form-data">
 			{% csrf_token %}
