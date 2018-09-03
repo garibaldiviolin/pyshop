@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +7,7 @@
 		PyShop
 	{% endblock title %}
 	</title>
+	<link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css" />
 </head>
 <body>
 	{% if messages %}
