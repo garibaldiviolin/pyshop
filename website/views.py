@@ -1,10 +1,10 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.views.generic import ListView, View
 from django.db.models import Q
 
-from .models import Product
+from .models import Category, Product
 
 
 class ProductsView(ListView):
@@ -27,8 +27,11 @@ class ProductsView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ProductsView, self).get_context_data(**kwargs)
+
         if self.request.user.is_authenticated:
             context['authenticated_user'] = self.request.user
+
+        context['categories'] = Category.objects.all()
         return context
 
 

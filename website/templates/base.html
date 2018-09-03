@@ -35,6 +35,12 @@
 		</form>
 	{% endif %}
 	<hr/>
+	<center>
+		{% for category in categories %}
+			{{ category.description }}&nbsp;
+		{% endfor %}
+	</center>
+	<hr/>
 	<form action="{% url 'website:index' %}">
 		<label for="q">Search</label>
 		<input type="text" name="q" id="q">
