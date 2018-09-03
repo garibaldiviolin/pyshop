@@ -6,6 +6,9 @@ class Category(models.Model):
 
     description = models.CharField(max_length=50)
 
+    def __repr__(self):
+        return self.description
+
     def __unicode__(self):
         return self.description
 
@@ -26,6 +29,9 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=3)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
+    def __repr__(self):
+        return self.description
+
     def __unicode__(self):
         return self.title
 
@@ -33,6 +39,9 @@ class Product(models.Model):
 class PaymentMethod(models.Model):
 
     description = models.CharField(unique=True, max_length=50)
+
+    def __repr__(self):
+        return self.description
 
     def __unicode__(self):
         return self.description
@@ -46,6 +55,9 @@ class PurchaseOrder(models.Model):
         on_delete=models.CASCADE,
     )
 
+    def __repr__(self):
+        return str(self.timestamp) + self.customer.name
+
     def __unicode__(self):
         return str(self.timestamp) + self.customer.name
 
@@ -58,6 +70,9 @@ class PurchaseItem(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=8, decimal_places=3)
 
+    def __repr__(self):
+        return str(self.id)
+
     def __unicode__(self):
         return str(self.id)
 
@@ -69,6 +84,9 @@ class PurchasePaymentMethod(models.Model):
         PaymentMethod, on_delete=models.PROTECT
     )
     value = models.DecimalField(max_digits=8, decimal_places=3)
+
+    def __repr__(self):
+        return str(self.id)
 
     def __unicode__(self):
         return str(self.id)
