@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import ListView, View
 from django.db.models import Q
@@ -12,6 +12,7 @@ class ProductsView(ListView):
     context_object_name = 'product_list'
 
     def get_queryset(self):
+
         queryset = Product.objects.all()
 
         q = self.request.GET.get('q', '')
@@ -33,6 +34,7 @@ class ProductsView(ListView):
 class LoginView(View):
 
     def post(self, request, *args, **kwargs):
+
         username = request.POST.get('username')
         password = request.POST.get('password')
 
@@ -47,3 +49,13 @@ class LoginView(View):
                 return HttpResponse('User is inactive')
         else:
             return HttpResponse('Invalid login')
+
+
+class LogoutView(View):
+
+    def post(self, request, *args, **kwargs):
+
+        logout(request)
+        previous_url = request.META.get('HTTP_REFERER')
+
+        return HttpResponseRedirect(previous_url)
