@@ -37,7 +37,7 @@
 	<hr/>
 	<center>
 		{% for category in categories %}
-			{{ category.description }}&nbsp;
+			<a href="{% url 'website:index' %}?category={{ category.description }}">{{ category.description }}</a>&nbsp;
 		{% endfor %}
 	</center>
 	<hr/>
