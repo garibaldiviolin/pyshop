@@ -2,64 +2,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>
-	{% block title %}
-		PyShop
-	{% endblock title %}
-	</title>
-	<link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css" />
+  <title>
+  {% block title %}
+    PyShop
+  {% endblock title %}
+  </title>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css" />
 </head>
 <body>
-	{% if messages %}
-		<ul class="messages">
-		    {% for message in messages %}
-		    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-		    {% endfor %}
-		</ul>
-	{% endif %}
-	{% if authenticated_user %}
-		<form action="{% url 'website:logout' %}" method="post">
-			{% csrf_token %}
-			Usuario: {{ authenticated_user }}
-			<input type="hidden" name="username" value="{{ authenticated_user }}">
-			<input type="submit" name="submit" value="Logout">
-		</form>
-	{% else %}
-		<form action="{% url 'website:login' %}" method="post" enctype="multipart/form-data">
-			{% csrf_token %}
-			<label for="username">Login:</label>
-			<input type="text" name="username" id="username">
-			<label for="password">Password:</label>
-			<input type="password" name="password" id="password">
-			<input type="submit" name="submit" value="Login">
-		</form>
-	{% endif %}
-	<hr/>
-	<center>
-		<a href='{% url 'website:index' %}'>Home Page</a>
-		{% for category in categories %}
-			<a href="{% url 'website:index' %}?category={{ category.description }}">{{ category.description }}</a>&nbsp;
-		{% endfor %}
-	</center>
-	<hr/>
-	<form action="{% url 'website:index' %}">
-		<label for="q">Search</label>
-		<input type="text" name="q" id="q">
-		<input type="submit" value="submit">
-	</form>
-	{% block content %}
-		<hr/>
-		<center>
-		<h1>Products List</h1>
-		{% for product in product_list %}
-			ID: {{ product.id }}<br/>
-			Title: {{ product.title }}<br/>
-			Description: {{ product.description }}<br/>
-			<img src='{{ product.image.url }}' /><br/>
-			Price: US$ {{ product.price }}<br/>
-			<hr/>
-		{% endfor %}
-		</center>
-	{% endblock content%}
+  {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+  {% endif %}
+  {% if authenticated_user %}
+    <form action="{% url 'website:logout' %}" method="post">
+      {% csrf_token %}
+      Usuario: {{ authenticated_user }}
+      <input type="hidden" name="username" value="{{ authenticated_user }}">
+      <input type="submit" name="submit" value="Logout">
+    </form>
+  {% else %}
+    <form action="{% url 'website:login' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="username">Login:</label>
+      <input type="text" name="username" id="username">
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password">
+      <input type="submit" name="submit" value="Login">
+    </form>
+  {% endif %}
+  <hr/>
+  <center>
+    <a href='{% url 'website:index' %}'>Home Page</a>
+    {% for category in categories %}
+      <a href="{% url 'website:index' %}?category={{ category.description }}">{{ category.description }}</a>&nbsp;
+    {% endfor %}
+  </center>
+  <hr/>
+  <form action="{% url 'website:index' %}">
+    <label for="q">Search</label>
+    <input type="text" name="q" id="q">
+    <input type="submit" value="submit">
+  </form>
+  {% block content %}
+    <hr/>
+    <center>
+    <h1>Products List</h1>
+    {% for product in product_list %}
+      ID: {{ product.id }}<br/>
+      Title: {{ product.title }}<br/>
+      Description: {{ product.description }}<br/>
+      <img src='{{ product.image.url }}' /><br/>
+      Price: US$ {{ product.price }}<br/>
+      <hr/>
+    {% endfor %}
+    </center>
+  {% endblock content%}
 </body>
 </html>
