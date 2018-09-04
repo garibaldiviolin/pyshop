@@ -36,6 +36,7 @@
 	{% endif %}
 	<hr/>
 	<center>
+		<a href='{% url 'website:index' %}'>Home Page</a>
 		{% for category in categories %}
 			<a href="{% url 'website:index' %}?category={{ category.description }}">{{ category.description }}</a>&nbsp;
 		{% endfor %}
