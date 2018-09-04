@@ -27,11 +27,11 @@
   {% else %}
     <form action="{% url 'website:login' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
-      <label for="username">Login:</label>
+      <label for="username">Username:</label>
       <input type="text" name="username" id="username">
       <label for="password">Password:</label>
       <input type="password" name="password" id="password">
-      <input type="submit" name="submit" value="Login">
+      <input type="submit" name="submit" value="Sign In">
     </form>
   {% endif %}
   <hr/>
