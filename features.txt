@@ -1,7 +1,11 @@
 Pendencias
 
+- Envio de email para cadastro de usuario
+
 
 
 Funcionalidades
 
+- Internacionalizacao (i18n)
+- REST API
 
