@@ -1,13 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView, View
 from django.views.generic.edit import FormView
-from django.db.models import Q
 
 from .forms import SignUpForm
-
-
 from .models import Category, Product
 
 

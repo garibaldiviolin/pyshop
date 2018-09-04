@@ -1,5 +1,6 @@
 from .models import Product, Category
 
+
 # Create default instances using the app's models
 
 category_list = [

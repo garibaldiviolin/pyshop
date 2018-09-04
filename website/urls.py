@@ -1,5 +1,7 @@
 from django.urls import path
+
 from .views import ProductsView, LoginView, LogoutView, SignUpView
+
 
 app_name = 'website'
 
