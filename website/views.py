@@ -2,7 +2,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView, View
+from django.views.generic.edit import FormView
 from django.db.models import Q
+
+from .forms import SignUpForm
+
 
 from .models import Category, Product
 
@@ -71,3 +75,15 @@ class LogoutView(View):
         previous_url = request.META.get('HTTP_REFERER')
 
         return HttpResponseRedirect(previous_url)
+
+
+class SignUpView(FormView):
+    template_name = 'signup.html'
+    form_class = SignUpForm
+    success_url = '/index'
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        form.save()
+        return super().form_valid(form)
