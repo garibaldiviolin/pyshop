@@ -16,6 +16,13 @@ class ProductsView(ListView):
 
         queryset = Product.objects.all()
 
+        category = self.request.GET.get('category', '')
+
+        if len(category) > 0:
+            queryset = queryset.filter(
+                category__description=category
+            )
+
         q = self.request.GET.get('q', '')
 
         if len(q) > 0:
@@ -23,6 +30,7 @@ class ProductsView(ListView):
                 Q(title__icontains=q) |
                 Q(description__icontains=q)
             )
+
         return queryset
 
     def get_context_data(self, **kwargs):
