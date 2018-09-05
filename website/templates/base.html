@@ -42,25 +42,8 @@
       <a href="{% url 'website:index' %}?category={{ category.description }}">{{ category.description }}</a>&nbsp;
     {% endfor %}
   </center>
-  <hr/>
-  <form action="{% url 'website:index' %}">
-    <label for="q">Search</label>
-    <input type="text" name="q" id="q">
-    <input type="submit" value="submit">
-  </form>
   {% block content %}
-    <hr/>
-    <center>
-    <h1>Products List</h1>
-    {% for product in product_list %}
-      ID: {{ product.id }}<br/>
-      Title: {{ product.title }}<br/>
-      Description: {{ product.description }}<br/>
-      <img src='{{ product.image.url }}' /><br/>
-      Price: US$ {{ product.price }}<br/>
-      <hr/>
-    {% endfor %}
-    </center>
-  {% endblock content%}
+  {% endblock content %}
+  <hr/>
 </body>
 </html>

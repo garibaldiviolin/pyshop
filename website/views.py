@@ -1,3 +1,5 @@
+import pdb
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.db.models import Q
@@ -6,7 +8,7 @@ from django.views.generic import ListView, View
 from django.views.generic.edit import CreateView
 
 from .forms import SignUpForm
-from .models import Category, Product
+from .models import Category, Product, CartProduct
 
 
 class ProductsView(ListView):
@@ -76,12 +78,47 @@ class LogoutView(View):
 
 
 class SignUpView(CreateView):
+
     template_name = 'signup.html'
     form_class = SignUpForm
     success_url = '/index'
 
     def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
+
         form.save()
         return super().form_valid(form)
+
+
+class AddToKartView(View):
+
+    def post(self, request, *args, **kwargs):
+
+        previous_url = request.META.get('HTTP_REFERER')
+
+        pdb.set_trace()
+
+        product_id = request.POST.get('product_id', None)
+        product_queryset = Product.objects.filter(barcode=product_id)
+
+        if not product_queryset.exists():
+            messages.error(request, 'User is inactive')
+            return HttpResponseRedirect(previous_url)
+        product = product_queryset.first()
+
+        if not request.session.exists(request.session.session_key):
+            request.session.create()
+
+        if request.user.is_authenticated:
+            anonymous_user = None
+            user = self.request.user
+        else:
+            anonymous_user = request.session['anonymous_user'] \
+                = request.session.session_key
+            user = None
+
+        cart_product = CartProduct(
+            user, anonymous_user, product, 1.000, product.price
+        )
+        cart_product.save()
+
+        return HttpResponseRedirect(previous_url)
