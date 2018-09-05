@@ -4,8 +4,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.db.models import Q
 from django.http import HttpResponseRedirect
-from django.views.generic import ListView, View
+from django.views.generic import ListView, View, DetailView
 from django.views.generic.edit import CreateView
+from django.shortcuts import get_object_or_404
 
 from .forms import SignUpForm
 from .models import Category, Product, CartProduct
@@ -122,3 +123,19 @@ class AddToKartView(View):
         )
 
         return HttpResponseRedirect(previous_url)
+
+
+class ProductDetailView(DetailView):
+
+    template_name = 'product_detail.html'
+
+    def get_object(self, *args, **kwargs):
+        slug = self.kwargs.get('slug')
+        instance = get_object_or_404(Product, slug=slug)
+        return instance
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(
+            *args, **kwargs
+        )
+        return context

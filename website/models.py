@@ -1,5 +1,10 @@
 from django.conf import settings
+from django.db.models.signals import pre_save
 from django.db import models
+from django.urls import reverse
+from django.utils.text import slugify
+
+from .utils import unique_slug_generator
 
 
 class Category(models.Model):
@@ -23,6 +28,7 @@ class Product(models.Model):
     '''
 
     barcode = models.CharField(primary_key=True, max_length=20)
+    slug = models.SlugField(unique=True)
     title = models.TextField()
     description = models.TextField()
     image = models.ImageField()
@@ -34,6 +40,17 @@ class Product(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('website:product-detail', kwargs={'slug': self.slug})
+
+
+def pre_save_post_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
+
+pre_save.connect(pre_save_post_receiver, sender=Product)
 
 
 class PaymentMethod(models.Model):
