@@ -116,9 +116,9 @@ class AddToKartView(View):
                 = request.session.session_key
             user = None
 
-        cart_product = CartProduct(
-            user, anonymous_user, product, 1.000, product.price
+        CartProduct.objects.create(
+            user=user, anonymous_user=anonymous_user, product=product,
+            quantity=1.000, total_price=product.price
         )
-        cart_product.save()
 
         return HttpResponseRedirect(previous_url)

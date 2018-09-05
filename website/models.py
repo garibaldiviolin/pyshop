@@ -95,6 +95,7 @@ class CartProduct(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
+        null=True
     )
     anonymous_user = models.CharField(max_length=500)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -102,7 +103,7 @@ class CartProduct(models.Model):
     total_price = models.DecimalField(max_digits=8, decimal_places=3)
 
     def __repr__(self):
-        return str(self.id + ' ' + self.product.title)
+        return str(self.id) + ' - ' + self.product.title
 
     def __unicode__(self):
-        return str(self.id + ' ' + self.product.title)
+        return str(self.id) + ' - ' + self.product.title
