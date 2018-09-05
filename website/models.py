@@ -2,7 +2,6 @@ from django.conf import settings
 from django.db.models.signals import pre_save
 from django.db import models
 from django.urls import reverse
-from django.utils.text import slugify
 
 from .utils import unique_slug_generator
 
@@ -45,12 +44,12 @@ class Product(models.Model):
         return reverse('website:product-detail', kwargs={'slug': self.slug})
 
 
-def pre_save_post_receiver(sender, instance, *args, **kwargs):
+def pre_save_product_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = unique_slug_generator(instance)
 
 
-pre_save.connect(pre_save_post_receiver, sender=Product)
+pre_save.connect(pre_save_product_receiver, sender=Product)
 
 
 class PaymentMethod(models.Model):

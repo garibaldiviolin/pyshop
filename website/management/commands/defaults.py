@@ -12,15 +12,15 @@ category_list = [
 
 product_list = [
     Product(
-        '7891234123459', 'Bread toaster', 'Lorem ipsum',
+        '7891234123459', None, 'Bread toaster', 'Lorem ipsum',
         'bread_toaster.jpg', 35.999, category_list[0].id
     ),
     Product(
-        '2012345012349', 'Wardrobe', 'Lorem ipsum',
+        '2012345012349', None, 'Wardrobe', 'Lorem ipsum',
         'wardrobe.jpeg', 55.990, category_list[1].id
     ),
     Product(
-        '5901234123457', 'Mattress', 'Lorem ipsum',
+        '5901234123457', None, 'Mattress', 'Lorem ipsum',
         'mattress.jpg', 800.724, category_list[1].id
     )
 ]
@@ -34,13 +34,8 @@ class Command(BaseCommand):
         Category.objects.bulk_create(category_list)
 
         Product.objects.all().delete()
-        Product.objects.bulk_create(product_list)
+        for product in product_list:
+            product.save()
 
     def handle(self, *args, **options):
         self._create_tags()
-
-
-if __name__ == '__main__':
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myapp.settings")
-    django.setup()
-    create_default_database_instances()

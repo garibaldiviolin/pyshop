@@ -1,5 +1,3 @@
-import pdb
-
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.db.models import Q
@@ -95,8 +93,6 @@ class AddToKartView(View):
     def post(self, request, *args, **kwargs):
 
         previous_url = request.META.get('HTTP_REFERER')
-
-        pdb.set_trace()
 
         product_id = request.POST.get('product_id', None)
         product_queryset = Product.objects.filter(barcode=product_id)
