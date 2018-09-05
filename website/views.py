@@ -1,5 +1,3 @@
-import pdb
-
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.db.models import Q
