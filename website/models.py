@@ -113,7 +113,6 @@ class CartProduct(models.Model):
         on_delete=models.CASCADE,
         null=True
     )
-    anonymous_user = models.CharField(max_length=500)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.DecimalField(max_digits=8, decimal_places=3)
     total_price = models.DecimalField(max_digits=8, decimal_places=3)
