@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.db.models import Q
 from django.http import HttpResponseRedirect
-from django.views.generic import ListView, View, DetailView
+from django.views.generic import ListView, View, DetailView, TemplateView
 from django.views.generic.edit import CreateView
 from django.shortcuts import get_object_or_404
 
@@ -47,7 +47,7 @@ class ProductsView(ListView):
         return context
 
 
-class SignInView(View):
+class SignInView(TemplateView):
 
     template_name = 'signin.html'
 
@@ -55,8 +55,6 @@ class SignInView(View):
 
         username = request.POST.get('username')
         password = request.POST.get('password')
-
-        previous_url = request.META.get('HTTP_REFERER')
 
         user = authenticate(username=username, password=password)
         if user is not None:
@@ -66,7 +64,7 @@ class SignInView(View):
                 messages.error(request, 'User is inactive')
         else:
             messages.error(request, 'Invalid login')
-        return HttpResponseRedirect(previous_url)
+        return HttpResponseRedirect(reverse_lazy('website:index'))
 
 
 class SignOutView(View):
@@ -98,7 +96,7 @@ class AddToCartView(View):
         previous_url = request.META.get('HTTP_REFERER')
 
         if not request.user.is_authenticated:
-            return HttpResponseRedirect(reverse_lazy('website:signup'))
+            return HttpResponseRedirect(reverse_lazy('website:signin'))
 
         product_id = request.POST.get('product_id', None)
         product_queryset = Product.objects.filter(barcode=product_id)
