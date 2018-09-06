@@ -11,11 +11,10 @@
   <center>
   <h1>Products List</h1>
   {% for product in product_list %}
-    ID: {{ product.barcode }}<br/>
-    Title: {{ product.title }}<br/>
-    Description: {{ product.description }}<br/>
+    {{ product.barcode }}<br/>
+    {{ product.title }}<br/>
     <img src="{{ product.image.url }}" /><br/>
-    Price: US$ {{ product.price }}<br/>
+    US$ {{ product.price }}<br/>
     <a href="{{ product.get_absolute_url }}">Details</a>
     <form action="{% url 'website:add-to-cart' %}" method="post">
     	{% csrf_token %}
