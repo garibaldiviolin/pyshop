@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.urls import reverse_lazy
 from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView, View, DetailView
@@ -80,7 +81,7 @@ class SignUpView(CreateView):
 
     template_name = 'signup.html'
     form_class = SignUpForm
-    success_url = 'website:index'
+    success_url = reverse_lazy('website:index')
 
     def form_valid(self, form):
 
