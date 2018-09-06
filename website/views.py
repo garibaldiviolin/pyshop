@@ -46,7 +46,7 @@ class ProductsView(ListView):
         return context
 
 
-class LoginView(View):
+class SignInView(View):
 
     def post(self, request, *args, **kwargs):
 
@@ -66,7 +66,7 @@ class LoginView(View):
         return HttpResponseRedirect(previous_url)
 
 
-class LogoutView(View):
+class SignOutView(View):
 
     def post(self, request, *args, **kwargs):
 
@@ -80,7 +80,7 @@ class SignUpView(CreateView):
 
     template_name = 'signup.html'
     form_class = SignUpForm
-    success_url = '/index'
+    success_url = 'website:index'
 
     def form_valid(self, form):
 

@@ -18,11 +18,11 @@
     </ul>
   {% endif %}
   {% if authenticated_user %}
-    <form action="{% url 'website:logout' %}" method="post">
+    <form action="{% url 'website:signout' %}" method="post">
       {% csrf_token %}
       Usuario: {{ authenticated_user }}
       <input type="hidden" name="username" value="{{ authenticated_user }}">
-      <input type="submit" name="submit" value="Logout">
+      <input type="submit" name="submit" value="Sign Out">
     </form>
   {% else %}
     {% include 'signin.html' %}

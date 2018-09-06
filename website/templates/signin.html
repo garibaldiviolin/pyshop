@@ -1,5 +1,5 @@
 {% load static %}
-<form action="{% url 'website:login' %}" method="post" enctype="multipart/form-data">
+<form action="{% url 'website:signin' %}" method="post" enctype="multipart/form-data">
   {% csrf_token %}
   <label for="username">Username:</label>
   <input type="text" name="username" id="username">
