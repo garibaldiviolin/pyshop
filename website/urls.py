@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import ProductsView, LoginView, LogoutView, SignUpView, \
-    AddToKartView, ProductDetailView
+    AddToCartView, ProductDetailView
 
 
 app_name = 'website'
@@ -17,5 +17,5 @@ urlpatterns = [
         'products/<slug:slug>/', ProductDetailView.as_view(),
         name='product-detail'
     ),
-    path('add-to-cart/', AddToKartView.as_view(), name='add-to-cart')
+    path('add-to-cart/', AddToCartView.as_view(), name='add-to-cart')
 ]

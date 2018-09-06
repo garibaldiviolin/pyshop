@@ -88,7 +88,7 @@ class SignUpView(CreateView):
         return super().form_valid(form)
 
 
-class AddToKartView(View):
+class AddToCartView(View):
 
     def post(self, request, *args, **kwargs):
 
