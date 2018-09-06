@@ -49,6 +49,8 @@ class ProductsView(ListView):
 
 class SignInView(View):
 
+    template_name = 'signin.html'
+
     def post(self, request, *args, **kwargs):
 
         username = request.POST.get('username')
@@ -94,6 +96,9 @@ class AddToCartView(View):
     def post(self, request, *args, **kwargs):
 
         previous_url = request.META.get('HTTP_REFERER')
+
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse_lazy('website:signup'))
 
         product_id = request.POST.get('product_id', None)
         product_queryset = Product.objects.filter(barcode=product_id)
