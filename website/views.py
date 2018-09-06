@@ -102,23 +102,14 @@ class AddToCartView(View):
         product_queryset = Product.objects.filter(barcode=product_id)
 
         if not product_queryset.exists():
-            messages.error(request, 'User is inactive')
+            messages.error(request, 'Product does not exists')
             return HttpResponseRedirect(previous_url)
         product = product_queryset.first()
 
-        if not request.session.exists(request.session.session_key):
-            request.session.create()
-
-        if request.user.is_authenticated:
-            anonymous_user = None
-            user = self.request.user
-        else:
-            anonymous_user = request.session['anonymous_user'] \
-                = request.session.session_key
-            user = None
+        user = self.request.user
 
         CartProduct.objects.create(
-            user=user, anonymous_user=anonymous_user, product=product,
+            user=user, product=product,
             quantity=1.000, total_price=product.price
         )
 
