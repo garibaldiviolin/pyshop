@@ -5,10 +5,10 @@ from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView, View, DetailView, TemplateView
 from django.views.generic.edit import CreateView
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 
 from .forms import SignUpForm
-from .models import Category, Product, CartProduct
+from .models import Category, Product, CartProduct, PurchaseOrder
 
 
 class ProductsView(ListView):
@@ -45,6 +45,39 @@ class ProductsView(ListView):
 
         context['categories'] = Category.objects.all()
         return context
+
+
+class ProfileView(TemplateView):
+
+    template_name = 'profile.html'
+
+    def get(self, request, *args, **kwargs):
+
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse_lazy('website:signin'))
+        return render(request, self.template_name, self.get_context_data())
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProfileView, self).get_context_data(
+            *args, **kwargs
+        )
+        context['purchase_orders'] = PurchaseOrder.objects.all()
+        return context
+
+    def post(self, request, *args, **kwargs):
+
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+            else:
+                messages.error(request, 'User is inactive')
+        else:
+            messages.error(request, 'Invalid login')
+        return HttpResponseRedirect(reverse_lazy('website:index'))
 
 
 class SignInView(TemplateView):

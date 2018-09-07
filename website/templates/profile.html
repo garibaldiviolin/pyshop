@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+  {% block title %}
+    My Profile
+  {% endblock title %}
+  </title>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}" type="text/css" />
+</head>
+<body>
+  {% block content %}
+    {% for purchase_order in purchase_orders %}
+      {{ purchase_order.timestamp }}
+      {{ purchase_order.user.username }}
+    {% endfor %}
+  {% endblock content %}
+</body>
+</html>

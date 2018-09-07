@@ -1,6 +1,10 @@
-from django.core.management.base import BaseCommand
+from datetime import datetime
 
-from website.models import Product, Category
+from django.core.management.base import BaseCommand
+from django.contrib.auth.models import User
+from django.utils import timezone
+
+from website.models import Product, Category, PurchaseOrder
 
 
 # Create default instances using the app's models
@@ -25,6 +29,14 @@ product_list = [
     )
 ]
 
+user = User.objects.first()
+
+purchase_order_list = [
+    PurchaseOrder(timestamp=timezone.now(), user=user),
+    PurchaseOrder(timestamp=timezone.now(), user=user),
+    PurchaseOrder(timestamp=timezone.now(), user=user),
+]
+
 
 class Command(BaseCommand):
 
@@ -36,6 +48,9 @@ class Command(BaseCommand):
         Product.objects.all().delete()
         for product in product_list:
             product.save()
+
+        PurchaseOrder.objects.all().delete()
+        PurchaseOrder.objects.bulk_create(purchase_order_list)
 
     def handle(self, *args, **options):
         self._create_tags()

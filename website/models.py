@@ -66,16 +66,16 @@ class PaymentMethod(models.Model):
 class PurchaseOrder(models.Model):
 
     timestamp = models.DateTimeField()
-    customer = models.ForeignKey(
+    user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
 
     def __repr__(self):
-        return str(self.timestamp) + self.customer.name
+        return str(self.timestamp) + self.user.username
 
     def __unicode__(self):
-        return str(self.timestamp) + self.customer.name
+        return str(self.timestamp) + self.user.username
 
 
 class PurchaseItem(Product):
