@@ -1,12 +1,12 @@
 from django.contrib import admin
 
-from .models import Product, PaymentMethod, PurchaseOrder, PurchaseItem, \
-    PurchasePaymentMethod
+from .models import Category, Product, PaymentMethod, PurchaseOrder, PurchaseItem, \
+    PurchasePaymentMethod, CartProduct
 
 
 admin_models = [
-    Product, PaymentMethod, PurchaseOrder,
-    PurchaseItem, PurchasePaymentMethod
+    Category, Product, PaymentMethod, PurchaseOrder,
+    PurchaseItem, PurchasePaymentMethod, CartProduct
 ]
 
 
