@@ -12,8 +12,7 @@
 <body>
   {% block content %}
     {% for purchase_order in purchase_orders %}
-      {{ purchase_order.timestamp }}
-      {{ purchase_order.user.username }}
+      ID: {{ purchase_order.id }} - Date: {{ purchase_order.timestamp }}<br/>
     {% endfor %}
   {% endblock content %}
 </body>
