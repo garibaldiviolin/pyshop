@@ -106,19 +106,11 @@ class PurchasePaymentMethod(models.Model):
         return str(self.id)
 
 
-class CartProduct(models.Model):
+class CartOrder(PurchaseOrder):
 
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        null=True
-    )
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.DecimalField(max_digits=8, decimal_places=3)
-    total_price = models.DecimalField(max_digits=8, decimal_places=3)
+    pass
 
-    def __repr__(self):
-        return str(self.id) + ' - ' + self.product.title
 
-    def __unicode__(self):
-        return str(self.id) + ' - ' + self.product.title
+class CartItem(PurchaseItem):
+
+    pass

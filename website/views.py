@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView
 from django.shortcuts import get_object_or_404, render
 
 from .forms import SignUpForm
-from .models import Category, Product, CartProduct, PurchaseOrder
+from .models import Category, Product, CartItem, PurchaseOrder
 
 
 class ProductsView(ListView):
@@ -141,7 +141,7 @@ class AddToCartView(View):
 
         user = self.request.user
 
-        CartProduct.objects.create(
+        CartItem.objects.create(
             user=user, product=product,
             quantity=1.000, total_price=product.price
         )
