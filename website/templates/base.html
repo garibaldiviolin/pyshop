@@ -19,12 +19,8 @@
     </ul>
   {% endif %}
   {% if authenticated_user %}
-    <form action="{% url 'website:signout' %}" method="post">
-      {% csrf_token %}
-      <a href="{% url 'website:profile' %}">{% trans 'MyProfile' %}</a>
-      <input type="hidden" name="username" value="{{ authenticated_user }}">
-      <input type="submit" name="submit" value="{% trans 'SignOut' %}">
-    </form>
+    <a href="{% url 'website:profile' %}">{% trans 'MyProfile' %}</a>
+    <a href="{% url 'website:signout' %}">{% trans 'SignOut' %}</a>
   {% else %}
     {% include 'signin.html' %}
   {% endif %}
