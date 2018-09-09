@@ -64,3 +64,6 @@ msgstr "Sign In"
 #: website/templates/signin.html:9
 msgid "SignUp"
 msgstr "Sign Up"
+
+msgid "AddToCart"
+msgstr "Add To Cart"

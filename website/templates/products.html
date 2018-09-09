@@ -20,7 +20,7 @@
     <form action="{% url 'website:add-to-cart' %}" method="post">
     	{% csrf_token %}
     	<input type="hidden" name="product_id" id="product_id" value="{{ product.barcode }}" />
-    	<input type="submit" name="add_cart_submit" id="add_cart_submit" value="Add To Cart" />
+    	<input type="submit" name="add_cart_submit" id="add_cart_submit" value="{% trans 'AddToCart' %}" />
     </form>
     <hr/>
   {% endfor %}

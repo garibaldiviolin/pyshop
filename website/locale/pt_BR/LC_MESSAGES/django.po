@@ -65,3 +65,6 @@ msgstr "Conectar"
 #: website/templates/signin.html:9
 msgid "SignUp"
 msgstr "Registrar-se"
+
+msgid "AddToCart"
+msgstr "Adicionar ao Carrinho"
