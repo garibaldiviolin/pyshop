@@ -10,3 +10,4 @@ Funcionalidades
 - REST API
 - Carrinho de compras com sessão ou cookie
 - Implementar os testes tanto com as páginas quanto com a API REST
+- Criar README.md
