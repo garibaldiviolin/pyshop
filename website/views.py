@@ -102,7 +102,7 @@ class SignInView(TemplateView):
 
 class SignOutView(View):
 
-    def post(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
 
         logout(request)
         previous_url = request.META.get('HTTP_REFERER')
