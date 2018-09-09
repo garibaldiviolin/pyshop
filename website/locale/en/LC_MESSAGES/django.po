@@ -1,0 +1,66 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-08 23:24-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: website/templates/base.html:26
+msgid "SignOut"
+msgstr "Sign Out"
+
+#: website/templates/base.html:33
+msgid "HomePage"
+msgstr "Home Page"
+
+#: website/templates/product_detail.html:13
+msgid "Title"
+msgstr "Title"
+
+#: website/templates/product_detail.html:14
+msgid "Description"
+msgstr "Description"
+
+#: website/templates/product_detail.html:16
+msgid "Price"
+msgstr "Price"
+
+#: website/templates/products.html:12
+msgid "ProductsList"
+msgstr "Products List"
+
+#: website/templates/products.html:18
+msgid "Details"
+msgstr "Details"
+
+#: website/templates/profile.html:7
+msgid "MyProfile"
+msgstr "My Profile"
+
+#: website/templates/signin.html:4
+msgid "Username"
+msgstr "Username"
+
+#: website/templates/signin.html:6
+msgid "Password"
+msgstr "Password"
+
+#: website/templates/signin.html:8
+msgid "SignIn"
+msgstr "Sign In"
+
+#: website/templates/signin.html:9
+msgid "SignUp"
+msgstr "Sign Up"

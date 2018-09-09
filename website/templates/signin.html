@@ -1,10 +1,11 @@
+{% load i18n %}
 {% load static %}
 <form action="{% url 'website:signin' %}" method="post" enctype="multipart/form-data">
   {% csrf_token %}
-  <label for="username">Username:</label>
+  <label for="username">{% trans 'Username' %}:</label>
   <input type="text" name="username" id="username">
-  <label for="password">Password:</label>
+  <label for="password">{% trans 'Password' %}:</label>
   <input type="password" name="password" id="password">
-  <input type="submit" name="submit" value="Sign In">
-  <a href='{% url 'website:signup' %}'>Sign Up</a>
+  <input type="submit" name="submit" value="{% trans 'SignIn' %}">
+  <a href='{% url 'website:signup' %}'>{% trans 'SignUp' %}</a>
 </form>

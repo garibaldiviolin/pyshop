@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 <hr/>
 {% block title %}Products List{% endblock title %}
 <form action="{% url 'website:index' %}">
@@ -9,13 +10,13 @@
 {% block content %}
   <hr/>
   <center>
-  <h1>Products List</h1>
+  <h1>{% trans 'ProductsList' %}</h1>
   {% for product in product_list %}
     {{ product.barcode }}<br/>
     {{ product.title }}<br/>
     <img src="{{ product.image.url }}" /><br/>
     US$ {{ product.price }}<br/>
-    <a href="{{ product.get_absolute_url }}">Details</a>
+    <a href="{{ product.get_absolute_url }}">{% trans 'Details' %}</a>
     <form action="{% url 'website:add-to-cart' %}" method="post">
     	{% csrf_token %}
     	<input type="hidden" name="product_id" id="product_id" value="{{ product.barcode }}" />

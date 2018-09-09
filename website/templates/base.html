@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -22,14 +23,14 @@
       {% csrf_token %}
       <a href="{% url 'website:profile' %}">{{ authenticated_user }}</a>
       <input type="hidden" name="username" value="{{ authenticated_user }}">
-      <input type="submit" name="submit" value="Sign Out">
+      <input type="submit" name="submit" value="{% trans 'SignOut' %}">
     </form>
   {% else %}
     {% include 'signin.html' %}
   {% endif %}
   <hr/>
   <center>
-    <a href='{% url 'website:index' %}'>Home Page</a>
+    <a href='{% url 'website:index' %}'>{% trans "HomePage" %}</a>
     {% for category in categories %}
       <a href="{% url 'website:index' %}?category={{ category.description }}">{{ category.description }}</a>&nbsp;
     {% endfor %}

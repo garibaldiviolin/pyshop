@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,6 @@
                 {% endfor %}
             </ul>
         {% endif %}
-        <h1>Create account - The Great Django Blog</h1>
          <form method="post" >
              {% csrf_token %}
              <table>
