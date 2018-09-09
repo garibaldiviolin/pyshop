@@ -17,7 +17,28 @@ class Category(models.Model):
         return self.description
 
 
-class Product(models.Model):
+class ProductBase(models.Model):
+
+    barcode = models.CharField(max_length=20)
+    slug = models.SlugField(unique=True)
+    title = models.TextField()
+    description = models.TextField()
+    image = models.ImageField()
+    price = models.DecimalField(max_digits=8, decimal_places=3)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    class Meta:
+
+        abstract = True
+
+    def __repr__(self):
+        return self.description
+
+    def __unicode__(self):
+        return self.title
+
+
+class Product(ProductBase):
     '''
     - The barcode length was chosen considering that usual products come with
       EAN-8, EAN-13, UPC-A or UPC-E
@@ -33,12 +54,6 @@ class Product(models.Model):
     image = models.ImageField()
     price = models.DecimalField(max_digits=8, decimal_places=3)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-
-    def __repr__(self):
-        return self.description
-
-    def __unicode__(self):
-        return self.title
 
     def get_absolute_url(self):
         return reverse('website:product-detail', kwargs={'slug': self.slug})
@@ -79,7 +94,7 @@ class PurchaseOrder(models.Model):
         return str(self.timestamp) + self.user.username
 
 
-class PurchaseItem(Product):
+class PurchaseItem(ProductBase):
 
     purchase_order = models.ForeignKey(PurchaseOrder, on_delete=models.CASCADE)
     quantity = models.DecimalField(max_digits=8, decimal_places=3)
