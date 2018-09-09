@@ -1,3 +1,5 @@
+import pdb
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -8,7 +10,7 @@ from django.views.generic.edit import CreateView
 from django.shortcuts import get_object_or_404, render
 
 from .forms import SignUpForm
-from .models import Category, Product, CartItem, PurchaseOrder
+from .models import Category, Product, PurchaseOrder, PurchaseItem
 
 
 class ProductsView(ListView):
@@ -139,11 +141,24 @@ class AddToCartView(View):
             return HttpResponseRedirect(previous_url)
         product = product_queryset.first()
 
+        pdb.set_trace()
+
         user = self.request.user
 
-        CartItem.objects.create(
-            user=user, product=product,
-            quantity=1.000, total_price=product.price
+        order_queryset = PurchaseOrder.objects.filter(user=user)
+        if order_queryset.exists():
+            purchase_order = order_queryset.first()
+        else:
+            purchase_order = PurchaseOrder.objects.create(
+                user=user
+            )
+
+        PurchaseItem.objects.create(
+            barcode=product.barcode, title=product.title,
+            descrition=product.description, image=product.image,
+            price=product.price, category=product.category,
+            purchase_order=purchase_order, quantity=1.000,
+            total_price=product.price
         )
 
         return HttpResponseRedirect(previous_url)

@@ -70,6 +70,7 @@ class PurchaseOrder(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
+    cart = models.BooleanField()
 
     def __repr__(self):
         return str(self.timestamp) + self.user.username
@@ -83,6 +84,7 @@ class PurchaseItem(Product):
     purchase_order = models.ForeignKey(PurchaseOrder, on_delete=models.CASCADE)
     quantity = models.DecimalField(max_digits=8, decimal_places=3)
     total_price = models.DecimalField(max_digits=8, decimal_places=3)
+    slug = None  # this class doesn't use this attribute
 
     def __repr__(self):
         return str(self.id)
@@ -104,13 +106,3 @@ class PurchasePaymentMethod(models.Model):
 
     def __unicode__(self):
         return str(self.id)
-
-
-class CartOrder(PurchaseOrder):
-
-    pass
-
-
-class CartItem(PurchaseItem):
-
-    pass

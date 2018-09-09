@@ -30,9 +30,9 @@ product_list = [
 user = User.objects.first()
 
 purchase_order_list = [
-    PurchaseOrder(timestamp=timezone.now(), user=user),
-    PurchaseOrder(timestamp=timezone.now(), user=user),
-    PurchaseOrder(timestamp=timezone.now(), user=user),
+    PurchaseOrder(timestamp=timezone.now(), user=user, cart=False),
+    PurchaseOrder(timestamp=timezone.now(), user=user, cart=False),
+    PurchaseOrder(timestamp=timezone.now(), user=user, cart=False),
 ]
 
 
