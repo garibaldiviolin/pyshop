@@ -1,7 +1,8 @@
 from django.urls import path
 
 from .views import ProductsView, SignInView, SignOutView, SignUpView, \
-    AddToCartView, ProductDetailView, ProfileView, PurchaseOrdersView
+    AddToCartView, ProductDetailView, ProfileView, PurchaseOrdersView, \
+    PurchaseOrderDetailView
 
 
 app_name = 'website'
@@ -15,6 +16,10 @@ urlpatterns = [
 
     path(
         'purchase-orders/', PurchaseOrdersView.as_view(),
+        name='purchase-orders'
+    ),
+    path(
+        'purchase-order/<int:id>/', PurchaseOrderDetailView.as_view(),
         name='purchase-orders'
     ),
     path('profile/', ProfileView.as_view(), name='profile'),

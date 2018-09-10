@@ -1,5 +1,3 @@
-import pdb
-
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -102,6 +100,22 @@ class PurchaseOrdersView(TemplateView):
         return HttpResponseRedirect(reverse_lazy('website:index'))
 
 
+class PurchaseOrderDetailView(DetailView):
+
+    template_name = 'purchase_order_detail.html'
+
+    def get_object(self, *args, **kwargs):
+        id = self.kwargs.get('id')
+        instance = get_object_or_404(PurchaseOrder, id=id)
+        return instance
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(PurchaseOrderDetailView, self).get_context_data(
+            *args, **kwargs
+        )
+        return context
+
+
 class SignInView(TemplateView):
 
     template_name = 'signin.html'
@@ -160,8 +174,6 @@ class AddToCartView(View):
             messages.error(request, 'Product does not exists')
             return HttpResponseRedirect(previous_url)
         product = product_queryset.first()
-
-        pdb.set_trace()
 
         user = self.request.user
 
