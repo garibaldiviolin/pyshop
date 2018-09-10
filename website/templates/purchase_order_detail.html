@@ -18,6 +18,7 @@
       {% else %}
         {% trans 'Completed' %}
       {% endif %}
+      <a href="{% url 'website:complete-purchase-order' purchase_order.id %}">Complete Purchase Order</a>
       <br/>
       <table border="1px">
         <tr>

@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views import ProductsView, SignInView, SignOutView, SignUpView, \
     AddToCartView, ProductDetailView, ProfileView, PurchaseOrdersView, \
-    PurchaseOrderDetailView
+    PurchaseOrderDetailView, CompletePurchaseOrderView
 
 
 app_name = 'website'
@@ -21,6 +21,11 @@ urlpatterns = [
     path(
         'purchase-order/<int:id>/', PurchaseOrderDetailView.as_view(),
         name='purchase-order'
+    ),
+    path(
+        'complete-purchase-order/<int:id>/',
+        CompletePurchaseOrderView.as_view(),
+        name='complete-purchase-order'
     ),
     path('profile/', ProfileView.as_view(), name='profile'),
 

@@ -121,6 +121,18 @@ class PurchaseOrderDetailView(TemplateView):
         return context
 
 
+class CompletePurchaseOrderView(DetailView):
+
+    def get(self, request, *args, **kwargs):
+        id = self.kwargs.get('id')
+
+        purchase_order = get_object_or_404(PurchaseOrder, id=id)
+        purchase_order.cart = False
+        purchase_order.save()
+
+        return HttpResponseRedirect(reverse_lazy('website:index'))
+
+
 class SignInView(TemplateView):
 
     template_name = 'signin.html'
