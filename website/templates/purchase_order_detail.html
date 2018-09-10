@@ -19,6 +19,18 @@
         {% trans 'Completed' %}
       {% endif %}
       <br/>
+      <table border="1px">
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+        </tr>
+        {% for purchase_item in purchase_items %}
+        <tr>
+          <td>{{ purchase_item.id }}</td>
+          <td>{{ purchase_item.title }}</td>
+        </tr>
+        {% endfor %}
+      </table>
   {% endblock content %}
 </body>
 </html>

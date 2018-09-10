@@ -100,7 +100,7 @@ class PurchaseOrdersView(TemplateView):
         return HttpResponseRedirect(reverse_lazy('website:index'))
 
 
-class PurchaseOrderDetailView(DetailView):
+class PurchaseOrderDetailView(TemplateView):
 
     template_name = 'purchase_order_detail.html'
 
@@ -113,6 +113,11 @@ class PurchaseOrderDetailView(DetailView):
         context = super(PurchaseOrderDetailView, self).get_context_data(
             *args, **kwargs
         )
+        purchase_items = PurchaseItem.objects.filter(
+            purchase_order_id=context['id']
+        )
+        if purchase_items.exists():
+            context['purchase_items'] = purchase_items
         return context
 
 
