@@ -13,7 +13,8 @@
 <body>
   {% block content %}
     {% for purchase_order in purchase_orders %}
-      ID: {{ purchase_order.id }} - Date: {{ purchase_order.timestamp }}
+      <a href="{% url 'website:purchase-order' purchase_order.id %}">ID: {{ purchase_order.id }}</a>
+      - Date: {{ purchase_order.timestamp }}
       {% if purchase_order.cart is True %}
         {% trans 'Pending' %}
       {% else %}

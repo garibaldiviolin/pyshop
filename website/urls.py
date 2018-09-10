@@ -20,7 +20,7 @@ urlpatterns = [
     ),
     path(
         'purchase-order/<int:id>/', PurchaseOrderDetailView.as_view(),
-        name='purchase-orders'
+        name='purchase-order'
     ),
     path('profile/', ProfileView.as_view(), name='profile'),
 
