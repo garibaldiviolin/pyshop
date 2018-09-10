@@ -83,7 +83,7 @@ class UserPurchaseView(TemplateView):
             *args, **kwargs
         )
         context['purchase_orders'] = PurchaseOrder.objects.all() \
-            .order_by('-cart').order_by('id')
+            .order_by('id').order_by('-cart')
         return context
 
     def post(self, request, *args, **kwargs):
