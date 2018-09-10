@@ -12,9 +12,9 @@
 </head>
 <body>
   {% block content %}
-    {% trans 'FirstName' %}: {{ user.username }}<br/>
-    {% trans 'LastName' %}: {{ user.username }}<br/>
-    Email: {{ user.username }}
+    {% for purchase_order in purchase_orders %}
+      ID: {{ purchase_order.id }} - Date: {{ purchase_order.timestamp }}<br/>
+    {% endfor %}
   {% endblock content %}
 </body>
 </html>

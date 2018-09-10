@@ -64,6 +64,24 @@ class ProfileView(TemplateView):
         context = super(ProfileView, self).get_context_data(
             *args, **kwargs
         )
+        context['user'] = self.request.user
+        return context
+
+
+class UserPurchaseView(TemplateView):
+
+    template_name = 'user_purchases.html'
+
+    def get(self, request, *args, **kwargs):
+
+        if not request.user.is_authenticated:
+            return HttpResponseRedirect(reverse_lazy('website:signin'))
+        return render(request, self.template_name, self.get_context_data())
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(UserPurchaseView, self).get_context_data(
+            *args, **kwargs
+        )
         context['purchase_orders'] = PurchaseOrder.objects.all()
         return context
 

@@ -68,3 +68,12 @@ msgstr "Registrar-se"
 
 msgid "AddToCart"
 msgstr "Adicionar ao Carrinho"
+
+msgid "MyPurchases"
+msgstr "Minhas Compras"
+
+msgid "FirstName"
+msgstr "Primeiro Nome"
+
+msgid "LastName"
+msgstr "Sobrenome"

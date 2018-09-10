@@ -67,3 +67,12 @@ msgstr "Sign Up"
 
 msgid "AddToCart"
 msgstr "Add To Cart"
+
+msgid "MyPurchases"
+msgstr "My Purchases"
+
+msgid "FirstName"
+msgstr "First Name"
+
+msgid "LastName"
+msgstr "Last Name"
