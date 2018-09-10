@@ -68,9 +68,9 @@ class ProfileView(TemplateView):
         return context
 
 
-class UserPurchaseView(TemplateView):
+class PurchaseOrdersView(TemplateView):
 
-    template_name = 'user_purchases.html'
+    template_name = 'purchase_orders.html'
 
     def get(self, request, *args, **kwargs):
 
@@ -79,7 +79,7 @@ class UserPurchaseView(TemplateView):
         return render(request, self.template_name, self.get_context_data())
 
     def get_context_data(self, *args, **kwargs):
-        context = super(UserPurchaseView, self).get_context_data(
+        context = super(PurchaseOrdersView, self).get_context_data(
             *args, **kwargs
         )
         context['purchase_orders'] = PurchaseOrder.objects.all() \

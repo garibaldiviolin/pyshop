@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import ProductsView, SignInView, SignOutView, SignUpView, \
-    AddToCartView, ProductDetailView, ProfileView, UserPurchaseView
+    AddToCartView, ProductDetailView, ProfileView, PurchaseOrdersView
 
 
 app_name = 'website'
@@ -13,7 +13,10 @@ urlpatterns = [
     path('signout/', SignOutView.as_view(), name='signout'),
     path('signup/', SignUpView.as_view(), name='signup'),
 
-    path('user-purchases/', UserPurchaseView.as_view(), name='user-purchases'),
+    path(
+        'purchase-orders/', PurchaseOrdersView.as_view(),
+        name='purchase-orders'
+    ),
     path('profile/', ProfileView.as_view(), name='profile'),
 
     path(
