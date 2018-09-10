@@ -13,7 +13,13 @@
 <body>
   {% block content %}
     {% for purchase_order in purchase_orders %}
-      ID: {{ purchase_order.id }} - Date: {{ purchase_order.timestamp }}<br/>
+      ID: {{ purchase_order.id }} - Date: {{ purchase_order.timestamp }}
+      {% if purchase_order.cart is True %}
+        {% trans 'Pending' %}
+      {% else %}
+        {% trans 'Completed' %}
+      {% endif %}
+      <br/>
     {% endfor %}
   {% endblock content %}
 </body>

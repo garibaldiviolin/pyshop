@@ -76,3 +76,9 @@ msgstr "First Name"
 
 msgid "LastName"
 msgstr "Last Name"
+
+msgid "Pending"
+msgstr "Pending"
+
+msgid "Completed"
+msgstr "Completed"
