@@ -20,7 +20,7 @@
   {% endif %}
   {% if authenticated_user %}
     <a href="{% url 'website:profile' %}">{% trans 'MyProfile' %}</a>
-    <a href="{% url 'website:user-purchases' %}">{% trans 'MyPurchases' %}</a>
+    <a href="{% url 'website:purchase-orders' %}">{% trans 'MyPurchases' %}</a>
     <a href="{% url 'website:signout' %}">{% trans 'SignOut' %}</a>
   {% else %}
     {% include 'signin.html' %}
