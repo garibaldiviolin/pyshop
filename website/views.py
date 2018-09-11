@@ -40,11 +40,27 @@ class ProductsView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ProductsView, self).get_context_data(**kwargs)
-
         if self.request.user.is_authenticated:
             context['authenticated_user'] = self.request.user
-
         context['categories'] = Category.objects.all()
+        return context
+
+
+class ProductDetailView(DetailView):
+
+    template_name = 'product_detail.html'
+
+    def get_object(self, *args, **kwargs):
+        slug = self.kwargs.get('slug')
+        instance = get_object_or_404(Product, slug=slug)
+        return instance
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(
+            *args, **kwargs
+        )
+        if self.request.user.is_authenticated:
+            context['authenticated_user'] = self.request.user
         return context
 
 
@@ -216,19 +232,3 @@ class AddToCartView(View):
         )
 
         return HttpResponseRedirect(previous_url)
-
-
-class ProductDetailView(DetailView):
-
-    template_name = 'product_detail.html'
-
-    def get_object(self, *args, **kwargs):
-        slug = self.kwargs.get('slug')
-        instance = get_object_or_404(Product, slug=slug)
-        return instance
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(ProductDetailView, self).get_context_data(
-            *args, **kwargs
-        )
-        return context
