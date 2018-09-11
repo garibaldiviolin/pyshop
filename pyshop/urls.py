@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', include('website.urls')),
+    path('manager/', include('manager.urls')),
 ]
 
 # enable permissions to read media folder
