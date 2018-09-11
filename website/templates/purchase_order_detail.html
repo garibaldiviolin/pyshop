@@ -12,26 +12,26 @@
 </head>
 <body>
   {% block content %}
-      ID: {{ purchase_order.id }} - Date: {{ purchase_order.timestamp }}
-      {% if purchase_order.cart is True %}
-        {% trans 'Pending' %}
-      {% else %}
-        {% trans 'Completed' %}
-      {% endif %}
-      <a href="{% url 'website:complete-purchase-order' purchase_order.id %}">Complete Purchase Order</a>
-      <br/>
-      <table border="1px">
-        <tr>
-          <th>ID</th>
-          <th>Title</th>
-        </tr>
-        {% for purchase_item in purchase_items %}
-        <tr>
-          <td>{{ purchase_item.id }}</td>
-          <td>{{ purchase_item.title }}</td>
-        </tr>
-        {% endfor %}
-      </table>
+    ID: {{ purchase_order.id }}<br/>
+    Date: {{ purchase_order.timestamp }}<br/>
+    {% if purchase_order.cart is True %}
+      {% trans 'Pending' %}
+    {% else %}
+      {% trans 'Completed' %}
+    {% endif %}<br/>
+    <a href="{% url 'website:complete-purchase-order' purchase_order.id %}">Complete Purchase Order</a><br/>
+    <table border="1px">
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+      </tr>
+      {% for purchase_item in purchase_items %}
+      <tr>
+        <td>{{ purchase_item.id }}</td>
+        <td>{{ purchase_item.title }}</td>
+      </tr>
+      {% endfor %}
+    </table>
   {% endblock content %}
 </body>
 </html>

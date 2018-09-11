@@ -113,8 +113,11 @@ class PurchaseOrderDetailView(TemplateView):
         context = super(PurchaseOrderDetailView, self).get_context_data(
             *args, **kwargs
         )
+        id = self.kwargs.get('id')
+        purchase_order = get_object_or_404(PurchaseOrder, id=id)
+        context['purchase_order'] = purchase_order
         purchase_items = PurchaseItem.objects.filter(
-            purchase_order_id=context['id']
+            purchase_order_id=purchase_order.id
         )
         if purchase_items.exists():
             context['purchase_items'] = purchase_items
