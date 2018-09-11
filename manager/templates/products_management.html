@@ -1,4 +1,22 @@
-<form method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save">
-</form>
+<h1>Products</h1>
+<a href="{% url 'manager:product-create' %}">New Product</a>
+<table border="1px">
+  <tr>
+    <th>Barcode</th>
+    <th>Title</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  {% for product in products %}
+  <tr>
+    <td>{{ product.barcode }}</td>
+    <td>{{ product.title }}</td>
+    <td>
+      <a href="{% url 'manager:product-edit' product.slug %}">Edit</a>
+    </td>
+    <td>
+      <a href="{% url 'manager:product-delete' product.slug %}">Delete</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>

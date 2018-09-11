@@ -3,10 +3,11 @@ from django import forms
 from website.models import Product
 
 
-class ProductManagementForm(forms.ModelForm):
+class ProductEditForm(forms.ModelForm):
 
     class Meta:
         model = Product
         fields = [
-            'barcode', 'title', 'description', 'image', 'price', 'category'
+            'barcode', 'slug', 'title', 'description',
+            'image', 'price', 'category'
         ]
