@@ -1,5 +1,3 @@
-import pdb
-
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -16,19 +14,19 @@ category_list = [
 
 product_list = [
     Product(
-        '7891234123459', None, 'Bread toaster',
-        'Lorem ipsum', 'bread_toaster.jpg', 35.999,
-        category_list[0].id
+        barcode='7891234123459', slug=None, title='Bread toaster',
+        description='Lorem ipsum', image='bread_toaster.jpg', price=35.999,
+        category_id=category_list[0].id
     ),
     Product(
-        '2012345012349', None, 'Wardrobe',
-        'Lorem ipsum', 'wardrobe.jpeg', 55.990,
-        category_list[1].id
+        barcode='2012345012349', slug=None, title='Wardrobe',
+        description='Lorem ipsum', image='wardrobe.jpeg', price=55.990,
+        category_id=category_list[1].id
     ),
     Product(
-        '5901234123457', None, 'Mattress',
-        'Lorem ipsum', 'mattress.jpg', 800.724,
-        category_list[1].id
+        barcode='5901234123457', slug=None, title='Mattress',
+        description='Lorem ipsum', image='mattress.jpg', price=800.724,
+        category_id=category_list[1].id
     )
 ]
 
@@ -51,7 +49,6 @@ class Command(BaseCommand):
         Product.objects.all().delete()
         for product in product_list:
             product.save()
-        pdb.set_trace()
 
         PurchaseOrder.objects.all().delete()
         PurchaseOrder.objects.bulk_create(purchase_order_list)

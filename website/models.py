@@ -31,7 +31,7 @@ class ProductBase(models.Model):
         abstract = True
 
     def __repr__(self):
-        return self.description
+        return self.title
 
     def __unicode__(self):
         return self.title
@@ -48,17 +48,6 @@ class Product(ProductBase):
 
     barcode = models.CharField(primary_key=True, max_length=20)
     slug = models.SlugField(unique=True)
-
-    def __init__(self, barcode, slug, title, description,
-                 image, price, category_id, *args, **kwargs):
-        super(ProductBase, self).__init__(self, *args, **kwargs)
-        self.barcode = barcode
-        self.slug = slug
-        self.title = title
-        self.description = description
-        self.image = image
-        self.price = price
-        self.category_id = category_id
 
     def get_absolute_url(self):
         return reverse('website:product-detail', kwargs={'slug': self.slug})
