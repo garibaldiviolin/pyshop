@@ -19,8 +19,7 @@ class Category(models.Model):
 
 class ProductBase(models.Model):
 
-    barcode = models.CharField(max_length=20)
-    slug = models.SlugField(unique=True)
+    barcode = models.CharField(primary_key=True, max_length=20)
     title = models.TextField()
     description = models.TextField()
     image = models.ImageField()
@@ -49,11 +48,17 @@ class Product(ProductBase):
 
     barcode = models.CharField(primary_key=True, max_length=20)
     slug = models.SlugField(unique=True)
-    title = models.TextField()
-    description = models.TextField()
-    image = models.ImageField()
-    price = models.DecimalField(max_digits=8, decimal_places=3)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    def __init__(self, barcode, slug, title, description,
+                 image, price, category_id, *args, **kwargs):
+        super(ProductBase, self).__init__(self, *args, **kwargs)
+        self.barcode = barcode
+        self.slug = slug
+        self.title = title
+        self.description = description
+        self.image = image
+        self.price = price
+        self.category_id = category_id
 
     def get_absolute_url(self):
         return reverse('website:product-detail', kwargs={'slug': self.slug})
