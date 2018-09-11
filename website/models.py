@@ -16,6 +16,9 @@ class Category(models.Model):
     def __unicode__(self):
         return self.description
 
+    def __str__(self):
+        return self.description
+
 
 class ProductBase(models.Model):
 
@@ -34,6 +37,9 @@ class ProductBase(models.Model):
         return self.title
 
     def __unicode__(self):
+        return self.title
+
+    def __str__(self):
         return self.title
 
 
@@ -71,6 +77,9 @@ class PaymentMethod(models.Model):
     def __unicode__(self):
         return self.description
 
+    def __str__(self):
+        return self.description
+
 
 class PurchaseOrder(models.Model):
 
@@ -87,6 +96,9 @@ class PurchaseOrder(models.Model):
     def __unicode__(self):
         return str(self.timestamp) + self.user.username
 
+    def __str__(self):
+        return str(self.timestamp) + self.user.username
+
 
 class PurchaseItem(ProductBase):
 
@@ -99,6 +111,9 @@ class PurchaseItem(ProductBase):
         return str(self.id)
 
     def __unicode__(self):
+        return str(self.id)
+
+    def __str__(self):
         return str(self.id)
 
 
@@ -114,4 +129,7 @@ class PurchasePaymentMethod(models.Model):
         return str(self.id)
 
     def __unicode__(self):
+        return str(self.id)
+
+    def __str__(self):
         return str(self.id)
