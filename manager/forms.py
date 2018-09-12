@@ -8,6 +8,6 @@ class ProductEditForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = [
-            'barcode', 'slug', 'title', 'description',
+            'barcode', 'title', 'description',
             'image', 'price', 'category'
         ]
