@@ -1,0 +1,22 @@
+<h1>Categories</h1>
+<a href="{% url 'manager:category-create' %}">New Category</a>
+<table border="1px">
+  <tr>
+    <th>ID</th>
+    <th>Description</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  {% for category in categories %}
+  <tr>
+    <td>{{ category.id }}</td>
+    <td>{{ category.description }}</td>
+    <td>
+      <a href="{% url 'manager:category-edit' category.id %}">Edit</a>
+    </td>
+    <td>
+      <a href="{% url 'manager:category-delete' category.id %}">Delete</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>

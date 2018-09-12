@@ -1,6 +1,13 @@
 from django import forms
 
-from website.models import Product
+from website.models import Category, Product
+
+
+class CategoryEditForm(forms.ModelForm):
+
+    class Meta:
+        model = Category
+        fields = ['description']
 
 
 class ProductEditForm(forms.ModelForm):
