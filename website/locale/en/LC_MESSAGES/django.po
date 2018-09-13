@@ -82,3 +82,6 @@ msgstr "Pending"
 
 msgid "Completed"
 msgstr "Completed"
+
+msgid "Manager"
+msgstr "Manager"

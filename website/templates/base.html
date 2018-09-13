@@ -27,6 +27,10 @@
   {% endif %}
   <hr/>
   <center>
+    <a href="{% url 'manager:index' %}">{% trans 'Manager' %}</a>
+  </center>
+  <hr/>
+  <center>
     <a href='{% url 'website:index' %}'>{% trans "HomePage" %}</a>
     {% for category in categories %}
       <a href="{% url 'website:index' %}?category={{ category.description }}">{{ category.description }}</a>&nbsp;

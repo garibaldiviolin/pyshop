@@ -83,3 +83,6 @@ msgstr "Pendente"
 
 msgid "Completed"
 msgstr "Completada"
+
+msgid "Manager"
+msgstr "Gerência"
