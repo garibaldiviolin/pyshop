@@ -11,3 +11,5 @@ Funcionalidades
 - Incluir gerenciamento de produtos e relatorios no manager
 - Implementar os testes tanto com as páginas quanto com a API REST
 - Criar README.md
+- requirements.txt
+- testes unitários
