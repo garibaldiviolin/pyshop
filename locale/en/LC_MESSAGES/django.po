@@ -85,3 +85,39 @@ msgstr "Completed"
 
 msgid "Manager"
 msgstr "Manager"
+
+msgid "Product"
+msgstr "Product"
+
+msgid "Products"
+msgstr "Products"
+
+msgid "NewProduct"
+msgstr "New Product"
+
+msgid "Barcode"
+msgstr "Barcode"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "AreYouSureYouWantToDelete"
+msgstr "Are you sure you want to delete"
+
+msgid "Confirm"
+msgstr "Confirm"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Category"
+msgstr "Category"
+
+msgid "Categories"
+msgstr "Categories"
+
+msgid "NewCategory"
+msgstr "New Category"

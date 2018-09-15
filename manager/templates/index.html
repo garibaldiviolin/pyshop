@@ -1,8 +1,9 @@
+{% load i18n %}
 <html>
 <head>
     <title>Manager Module</title>
 </head>
 <body>
-	<a href="{% url 'manager:categories' %}">Categories</a><br/>
-    <a href="{% url 'manager:products' %}">Products</a>
+	<a href="{% url 'manager:categories' %}">{% trans 'Categories' %}</a><br/>
+    <a href="{% url 'manager:products' %}">{% trans 'Products' %}</a>
 </html>

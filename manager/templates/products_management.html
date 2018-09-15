@@ -1,21 +1,22 @@
-<h1>Products</h1>
-<a href="{% url 'manager:product-create' %}">New Product</a>
+{% load i18n %}
+<h1>{% trans 'Products' %}</h1>
+<a href="{% url 'manager:product-create' %}">{% trans 'NewProduct' %}</a>
 <table border="1px">
   <tr>
-    <th>Barcode</th>
-    <th>Title</th>
-    <th>Edit</th>
-    <th>Delete</th>
+    <th>{% trans 'Barcode' %}</th>
+    <th>{% trans 'Title' %}</th>
+    <th>{% trans 'Edit' %}</th>
+    <th>{% trans 'Delete' %}</th>
   </tr>
   {% for product in products %}
   <tr>
     <td>{{ product.barcode }}</td>
     <td>{{ product.title }}</td>
     <td>
-      <a href="{% url 'manager:product-edit' product.slug %}">Edit</a>
+      <a href="{% url 'manager:product-edit' product.slug %}">{% trans 'Edit' %}</a>
     </td>
     <td>
-      <a href="{% url 'manager:product-delete' product.slug %}">Delete</a>
+      <a href="{% url 'manager:product-delete' product.slug %}">{% trans 'Delete' %}</a>
     </td>
   </tr>
   {% endfor %}

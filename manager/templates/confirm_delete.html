@@ -1,4 +1,5 @@
+{% load i18n %}
 <form method="post">{% csrf_token %}
-    <p>Are you sure you want to delete "{{ object }}"?</p>
-    <input type="submit" value="Confirm">
+    <p>{% trans 'AreYouSureYouWantToDelete' %} "{{ object }}"?</p>
+    <input type="submit" value="{% trans 'Confirm' %}">
 </form>
