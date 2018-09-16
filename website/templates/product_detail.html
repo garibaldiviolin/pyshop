@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 <hr/>
-{% block title %}Products List{% endblock title %}
+{% block title %}{% trans 'ProductsList' %}{% endblock title %}
  <form action="{% url 'website:index' %}">
     <label for="q">Search</label>
     <input type="text" name="q" id="q">

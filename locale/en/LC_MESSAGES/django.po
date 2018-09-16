@@ -121,3 +121,12 @@ msgstr "Categories"
 
 msgid "NewCategory"
 msgstr "New Category"
+
+msgid "Invalidlogin"
+msgstr "Invalid login."
+
+msgid "UserIsInactive"
+msgstr "User is inactive."
+
+msgid "ProductDoesNotExist"
+msgstr "Product does not exist."

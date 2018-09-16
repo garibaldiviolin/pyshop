@@ -7,6 +7,7 @@ from django.views.generic import ListView, View, DetailView, TemplateView
 from django.views.generic.edit import CreateView
 from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
+from django.utils.translation import ugettext
 
 from .forms import SignUpForm
 from .models import Category, Product, PurchaseOrder, PurchaseItem
@@ -112,7 +113,7 @@ class PurchaseOrdersView(TemplateView):
             else:
                 messages.error(request, 'User is inactive')
         else:
-            messages.error(request, 'Invalid login')
+            messages.error(request, ugettext('Invalidlogin'))
         return HttpResponseRedirect(reverse_lazy('website:index'))
 
 
@@ -166,9 +167,9 @@ class SignInView(TemplateView):
             if user.is_active:
                 login(request, user)
             else:
-                messages.error(request, 'User is inactive')
+                messages.error(request, ugettext('UserIsInactive'))
         else:
-            messages.error(request, 'Invalid login')
+            messages.error(request, ugettext('Invalidlogin'))
         return HttpResponseRedirect(reverse_lazy('website:index'))
 
 
@@ -207,7 +208,7 @@ class AddToCartView(View):
         product_queryset = Product.objects.filter(barcode=product_id)
 
         if not product_queryset.exists():
-            messages.error(request, 'Product does not exists')
+            messages.error(request, ugettext('ProductDoesNotExist'))
             return HttpResponseRedirect(previous_url)
         product = product_queryset.first()
 

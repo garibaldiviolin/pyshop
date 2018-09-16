@@ -122,3 +122,12 @@ msgstr "Produto"
 
 msgid "Products"
 msgstr "Produtos"
+
+msgid "Invalidlogin"
+msgstr "Usuário e/ou senha inválido(s)."
+
+msgid "UserIsInactive"
+msgstr "O usuário está inativo."
+
+msgid "ProductDoesNotExist"
+msgstr "O produto não existe."
