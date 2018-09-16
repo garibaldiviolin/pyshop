@@ -130,3 +130,6 @@ msgstr "User is inactive."
 
 msgid "ProductDoesNotExist"
 msgstr "Product does not exist."
+
+msgid "ManagerModule"
+msgstr "Manager Module"

@@ -1,9 +1,13 @@
 {% load i18n %}
 <html>
 <head>
-    <title>Manager Module</title>
+    <title>{% trans 'ManagerModule' %}</title>
 </head>
 <body>
+	<a href="{% url 'website:index' %}">{% trans 'HomePage' %}</a><br/>
+	<hr>
+	<h1 align="center">{% trans 'ManagerModule' %}</h1>
+	<hr/>
 	<a href="{% url 'manager:categories' %}">{% trans 'Categories' %}</a><br/>
     <a href="{% url 'manager:products' %}">{% trans 'Products' %}</a>
 </html>
