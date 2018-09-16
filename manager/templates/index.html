@@ -1,13 +1,9 @@
+{% extends 'manager_base.html' %}
 {% load i18n %}
-<html>
-<head>
-    <title>{% trans 'ManagerModule' %}</title>
-</head>
-<body>
-	<a href="{% url 'website:index' %}">{% trans 'HomePage' %}</a><br/>
-	<hr>
-	<h1 align="center">{% trans 'ManagerModule' %}</h1>
-	<hr/>
-	<a href="{% url 'manager:categories' %}">{% trans 'Categories' %}</a><br/>
-    <a href="{% url 'manager:products' %}">{% trans 'Products' %}</a>
-</html>
+{% block title %}
+  {% trans 'ManagerModule' %}
+{% endblock title %}
+{% block content %}
+  <a href="{% url 'manager:categories' %}">{% trans 'Categories' %}</a><br/>
+  <a href="{% url 'manager:products' %}">{% trans 'Products' %}</a>
+{% endblock content %}

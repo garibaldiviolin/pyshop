@@ -1,0 +1,20 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+  {% block title %}
+    {% trans 'ManagerModule' %}
+  {% endblock title %}
+  </title>
+</head>
+<body>
+  <a href="{% url 'website:index' %}">{% trans 'HomePage' %}</a><br/>
+  <hr>
+  <h1 align="center">{% trans 'ManagerModule' %}</h1>
+  <hr/>
+  {% block content %}
+  {% endblock content %}
+</body>
+</html>

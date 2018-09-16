@@ -1,23 +1,29 @@
+{% extends 'manager_base.html' %}
 {% load i18n %}
-<h1>{% trans 'Categories' %}</h1>
-<a href="{% url 'manager:category-create' %}">{% trans 'NewCategory' %}</a>
-<table border="1px">
-  <tr>
-    <th>ID</th>
-    <th>{% trans 'Description' %}</th>
-    <th>{% trans 'Edit' %}</th>
-    <th>{% trans 'Delete' %}</th>
-  </tr>
-  {% for category in categories %}
-  <tr>
-    <td>{{ category.id }}</td>
-    <td>{{ category.description }}</td>
-    <td>
-      <a href="{% url 'manager:category-edit' category.id %}">{% trans 'Edit' %}</a>
-    </td>
-    <td>
-      <a href="{% url 'manager:category-delete' category.id %}">{% trans 'Delete' %}</a>
-    </td>
-  </tr>
-  {% endfor %}
-</table>
+{% block title %}
+  {% trans 'ManagerModule' %}
+{% endblock title %}
+{% block content %}
+  <h1>{% trans 'Categories' %}</h1>
+  <a href="{% url 'manager:category-create' %}">{% trans 'NewCategory' %}</a>
+  <table border="1px">
+    <tr>
+      <th>ID</th>
+      <th>{% trans 'Description' %}</th>
+      <th>{% trans 'Edit' %}</th>
+      <th>{% trans 'Delete' %}</th>
+    </tr>
+    {% for category in categories %}
+    <tr>
+      <td>{{ category.id }}</td>
+      <td>{{ category.description }}</td>
+      <td>
+        <a href="{% url 'manager:category-edit' category.id %}">{% trans 'Edit' %}</a>
+      </td>
+      <td>
+        <a href="{% url 'manager:category-delete' category.id %}">{% trans 'Delete' %}</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock content %}
