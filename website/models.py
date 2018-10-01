@@ -20,9 +20,6 @@ class Category(models.Model):
     def __repr__(self):
         return self.description
 
-    def __unicode__(self):
-        return self.description
-
     def __str__(self):
         return self.description
 
@@ -49,9 +46,6 @@ class ProductBase(models.Model):
         abstract = True
 
     def __repr__(self):
-        return self.title
-
-    def __unicode__(self):
         return self.title
 
     def __str__(self):
@@ -101,9 +95,6 @@ class PaymentMethod(models.Model):
     def __repr__(self):
         return self.description
 
-    def __unicode__(self):
-        return self.description
-
     def __str__(self):
         return self.description
 
@@ -123,9 +114,6 @@ class PurchaseOrder(models.Model):
         verbose_name_plural = ugettext_lazy('PurchaseOrders')
 
     def __repr__(self):
-        return str(self.timestamp) + self.user.username
-
-    def __unicode__(self):
         return str(self.timestamp) + self.user.username
 
     def __str__(self):
@@ -154,9 +142,6 @@ class PurchaseItem(ProductBase):
     def __repr__(self):
         return str(self.id)
 
-    def __unicode__(self):
-        return str(self.id)
-
     def __str__(self):
         return str(self.id)
 
@@ -180,9 +165,6 @@ class PurchasePaymentMethod(models.Model):
         verbose_name_plural = ugettext_lazy('PurchasePaymentMethods')
 
     def __repr__(self):
-        return str(self.id)
-
-    def __unicode__(self):
         return str(self.id)
 
     def __str__(self):
