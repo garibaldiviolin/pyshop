@@ -122,6 +122,10 @@ class PurchaseOrder(models.Model):
 
 class PurchaseItem(ProductBase):
 
+    id = models.AutoField(primary_key=True)
+    barcode = models.CharField(
+        max_length=20, verbose_name=ugettext_lazy('Barcode')
+    )
     purchase_order = models.ForeignKey(
         PurchaseOrder, on_delete=models.CASCADE,
         verbose_name=ugettext_lazy('PurchaseOrder')
