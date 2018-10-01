@@ -114,10 +114,10 @@ class PurchaseOrder(models.Model):
         verbose_name_plural = ugettext_lazy('PurchaseOrders')
 
     def __repr__(self):
-        return str(self.timestamp) + self.user.username
+        return '{} - {}'.format(str(self.id), self.user.username)
 
     def __str__(self):
-        return str(self.timestamp) + self.user.username
+        return '{} - {}'.format(str(self.id), self.user.username)
 
 
 class PurchaseItem(ProductBase):
