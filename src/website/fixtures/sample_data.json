@@ -15,6 +15,25 @@
   },
 
   {
+    "model": "auth.user",
+      "pk": 1,
+      "fields": {
+        "password": "pbkdf2_sha256$120000$0Bx6a8MnsPO7$sneTEt67K2rnj9pCxXRocxo+ZsqOSrCohHJBKwUBtCA=",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@admin.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2018-10-02T17:45:00.451Z",
+        "groups": [],
+        "user_permissions": []
+      }
+  },
+
+  {
     "model": "website.Product",
       "pk": "7891234123459",
       "fields": {
@@ -23,6 +42,38 @@
         "image": "bread_toaster.jpg",
         "price": 35.999,
         "category_id": 1
+      }
+  },
+  {
+    "model": "website.Product",
+      "pk": "2012345012349",
+      "fields": {
+        "title": "Wardrobe",
+        "description": "Lorem ipsum",
+        "image": "wardrobe.jpeg",
+        "price": 55.990,
+        "category_id": 1
+      }
+  },
+  {
+    "model": "website.Product",
+      "pk": "5901234123457",
+      "fields": {
+        "title": "Mattress",
+        "description": "Lorem ipsum",
+        "image": "mattress.jpg",
+        "price": 800.724,
+        "category_id": 1
+      }
+  },
+
+  {
+    "model": "website.PurchaseOrder",
+      "pk": 1,
+      "fields": {
+        "timestamp": "2013-03-16T17:41:28+00:00",
+        "user_id": 1,
+        "cart": false
       }
   }
 ]
