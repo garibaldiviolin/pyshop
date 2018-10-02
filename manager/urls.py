@@ -11,7 +11,7 @@ urlpatterns = [
 
     path('categories/', CategoriesManagementView.as_view(), name='categories'),
     path(
-        'category-create', CategoryEditView.as_view(), name='category-create'
+        'category-create/', CategoryEditView.as_view(), name='category-create'
     ),
     path(
         'category-edit/<int:id>/', CategoryEditView.as_view(),
@@ -23,7 +23,7 @@ urlpatterns = [
     ),
 
     path('products/', ProductsManagementView.as_view(), name='products'),
-    path('product-create', ProductEditView.as_view(), name='product-create'),
+    path('product-create/', ProductEditView.as_view(), name='product-create'),
     path(
         'product-edit/<slug:slug>/', ProductEditView.as_view(),
         name='product-edit'
