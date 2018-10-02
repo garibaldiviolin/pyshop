@@ -2,7 +2,7 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.firefox.webdriver import WebDriver
 
 
-class MySeleniumTests(StaticLiveServerTestCase):
+'''class MySeleniumTests(StaticLiveServerTestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -17,7 +17,7 @@ class MySeleniumTests(StaticLiveServerTestCase):
 
     def test_login(self):
         self.selenium.get('%s%s' % (self.live_server_url, '/'))
-        self.assertEqual('Lista de Produtos', self.selenium.title)
+        self.assertEqual('Lista de Produtos', self.selenium.title)'''
 
 
 '''class IndexTestCase(LiveServerTestCase):
