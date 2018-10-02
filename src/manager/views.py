@@ -35,11 +35,8 @@ class CategoryEditView(UpdateView):
     def get_object(self, queryset=None):
         # pdb.set_trace()
         id = self.kwargs.get('id', None)
-        if id is not None:
-            instance = get_object_or_404(Category, id=id)
-            return instance
-        else:
-            return None
+        instance = get_object_or_404(Category, id=id)
+        return instance
 
 
 class CategoryDeleteView(DeleteView):
@@ -70,11 +67,8 @@ class ProductEditView(UpdateView):
     def get_object(self, queryset=None):
         # pdb.set_trace()
         slug = self.kwargs.get('slug', None)
-        if slug is not None:
-            instance = get_object_or_404(Product, slug=slug)
-            return instance
-        else:
-            return None
+        instance = get_object_or_404(Product, slug=slug)
+        return instance
 
 
 class ProductDeleteView(DeleteView):
