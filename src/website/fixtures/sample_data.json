@@ -1,0 +1,28 @@
+[
+  {
+    "model": "website.Category",
+      "pk": 1,
+      "fields": {
+        "description": "Appliances"
+      }
+  },
+  {
+    "model": "website.Category",
+      "pk": 1,
+      "fields": {
+        "description": "Bedroom Furniture"
+      }
+  },
+
+  {
+    "model": "website.Product",
+      "pk": "7891234123459",
+      "fields": {
+        "title": "Bread toaster",
+        "description": "Lorem ipsum",
+        "image": "bread_toaster.jpg",
+        "price": 35.999,
+        "category_id": 1
+      }
+  }
+]
