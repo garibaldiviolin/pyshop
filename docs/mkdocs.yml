@@ -1,0 +1,6 @@
+site_name: PyShop
+nav:
+    - Home: index.md
+    - Installing and Running: installation.md
+    - API Documentation: api.md
+theme: readthedocs
