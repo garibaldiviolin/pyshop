@@ -1,5 +1,5 @@
-from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
 from django.db.models import Q
 from django.http import HttpResponseRedirect
@@ -101,30 +101,10 @@ class PurchaseOrdersView(TemplateView):
             .order_by('id').order_by('-cart')
         return context
 
-    def post(self, request, *args, **kwargs):
-
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-            else:
-                messages.error(request, 'User is inactive')
-        else:
-            messages.error(request, ugettext('Invalidlogin'))
-        return HttpResponseRedirect(reverse_lazy('website:index'))
-
 
 class PurchaseOrderDetailView(TemplateView):
 
     template_name = 'purchase_order_detail.html'
-
-    def get_object(self, *args, **kwargs):
-        id = self.kwargs.get('id')
-        instance = get_object_or_404(PurchaseOrder, id=id)
-        return instance
 
     def get_context_data(self, *args, **kwargs):
         context = super(PurchaseOrderDetailView, self).get_context_data(
@@ -166,7 +146,7 @@ class SignInView(TemplateView):
         if user is not None:
             if user.is_active:
                 login(request, user)
-            else:
+            else:  # pragma: no cover
                 messages.error(request, ugettext('UserIsInactive'))
         else:
             messages.error(request, ugettext('Invalidlogin'))
@@ -205,12 +185,7 @@ class AddToCartView(View):
             return HttpResponseRedirect(reverse_lazy('website:signin'))
 
         product_id = request.POST.get('product_id', None)
-        product_queryset = Product.objects.filter(barcode=product_id)
-
-        if not product_queryset.exists():
-            messages.error(request, ugettext('ProductDoesNotExist'))
-            return HttpResponseRedirect(previous_url)
-        product = product_queryset.first()
+        product = get_object_or_404(Product, barcode=product_id)
 
         user = self.request.user
 
