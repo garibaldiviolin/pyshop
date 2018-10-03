@@ -15,7 +15,7 @@ from .models import Category, Product, PurchaseOrder, PurchaseItem
 
 class ProductsView(ListView):
 
-    template_name = "products.html"
+    template_name = 'products.html'
     context_object_name = 'product_list'
 
     def get_queryset(self):
