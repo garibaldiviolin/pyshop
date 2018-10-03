@@ -1,3 +1,5 @@
+import pdb
+
 from django.contrib.auth.models import User
 from django.db.utils import IntegrityError
 from django.test import TestCase
@@ -77,15 +79,12 @@ class ProductModelTest(TestCase):
             description=self.description, image=self.image, price=self.price,
             category_id=self.category.id
         )
-        try:
+        with self.assertRaises(IntegrityError):
             Product.objects.create(
                 barcode=self.barcode, slug=self.slug, title=self.title,
                 description=self.description, image=self.image,
                 price=self.price, category_id=self.category.id
             )
-            self.fail("IntegrityError UNIQUE constraint error was expected")
-        except IntegrityError:
-            pass
 
     def test_str(self):
         expected_result = self.title
@@ -130,7 +129,7 @@ class PaymentMethodTest(TestCase):
         self.assertEqual(str(payment_method), expected_result)
 
     def test_repr(self):
-        payment_method = Category(description=self.description)
+        payment_method = PaymentMethod(description=self.description)
         expected_result = self.description
         self.assertEqual(repr(payment_method), expected_result)
 
@@ -192,8 +191,6 @@ class PurchaseOrderTest(TestCase):
 class PurchaseItemTest(TestCase):
     """ Test case for the PurchaseItem model """
 
-    description = 'Test123'
-
     def setUp(self):
         # create user instance
         self.user = User.objects.create(
@@ -239,13 +236,35 @@ class PurchaseItemTest(TestCase):
         )
         self.assertEqual(created_purchase_item, queried_purchase_item)
 
+    def test_str(self):
+        expected_result = '1'
+        purchase_item = PurchaseItem.objects.create(
+            purchase_order=self.created_purchase_order,
+            quantity=1.0,
+            price=1.0,
+            category=self.category,
+            total_price=2.0
+        )
+        self.assertEqual(str(purchase_item), expected_result)
+
+    def test_repr(self):
+        expected_result = '1'
+        purchase_item = PurchaseItem.objects.create(
+            purchase_order=self.created_purchase_order,
+            quantity=1.0,
+            price=1.0,
+            category=self.category,
+            total_price=2.0
+        )
+        self.assertEqual(repr(purchase_item), expected_result)
+
 
 class PurchasePaymentMethodTest(TestCase):
     """ Test case for the PurchasePaymentMethod model """
 
-    description = 'Test123'
-
     def setUp(self):
+        self.description = 'Cash'
+
         # create user instance
         self.user = User.objects.create(
             username='user12',
@@ -289,3 +308,21 @@ class PurchasePaymentMethodTest(TestCase):
         self.assertEqual(
             created_purchase_payment_method, queried_purchase_payment_method
         )
+
+    def test_str(self):
+        expected_result = '1'
+        purchase_payment_method = PurchasePaymentMethod.objects.create(
+            purchase_order=self.purchase_order,
+            payment_method=self.payment_method,
+            value=2.0
+        )
+        self.assertEqual(str(purchase_payment_method), expected_result)
+
+    def test_repr(self):
+        expected_result = '1'
+        purchase_payment_method = PurchasePaymentMethod.objects.create(
+            purchase_order=self.purchase_order,
+            payment_method=self.payment_method,
+            value=2.0
+        )
+        self.assertEqual(repr(purchase_payment_method), expected_result)
