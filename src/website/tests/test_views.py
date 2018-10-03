@@ -34,6 +34,25 @@ class ProductsViewTest(TestCase):
             list(self.category_queryset)
         )
 
+    def test_query_products(self):
+        response = self.client.get(
+            reverse('website:index'),
+            {
+                'category': 'Category',
+                'q': 'Mattress'
+            }
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            list(response.context_data['product_list']),
+            list(self.product_queryset)
+        )
+        self.assertEqual(
+            list(response.context_data['categories']),
+            list(self.category_queryset)
+        )
+
 
 class ProductDetailViewTest(TestCase):
     """ Test case for the ProductDetailView """
