@@ -24,6 +24,8 @@ urlpatterns = [
 
     path('', include('website.urls')),
     path('manager/', include('manager.urls')),
+
+    path('api/', include('restapi.urls')),
 ]
 
 # enable permissions to read media folder
