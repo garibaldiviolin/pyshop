@@ -3,6 +3,8 @@ from django.urls import path
 from .views import CategoryCreateView, ProductCreateView
 
 
+app_name = 'restapi'
+
 urlpatterns = [
     path(
         'v1/categories/',
