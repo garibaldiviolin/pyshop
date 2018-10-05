@@ -1,5 +1,4 @@
 import os
-import pdb
 
 from django.urls import reverse
 from rest_framework import test, status
