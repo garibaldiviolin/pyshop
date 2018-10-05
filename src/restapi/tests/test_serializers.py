@@ -1,3 +1,5 @@
+import os
+
 from django.test import TestCase
 from rest_framework import serializers
 
@@ -39,11 +41,16 @@ class ProductSerializerTest(TestCase):
     """ Test case for the Product model serializer """
 
     def setUp(self):
+        self.image_path = os.path.join(
+            BASE_DIR, 'website/fixtures/', 'sample_image.jpg'
+        )
+        self.image = open(self.image_path, 'rb')
+
         self.json = {
             'barcode': '789789789',
             'title': '4654',
             'description': '654',
-            'image': '{}/{}'.format(BASE_DIR, 'download.jpg'),
+            'image': self.image,
             'price': '123.000',
             'category': 1
         }
