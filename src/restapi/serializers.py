@@ -8,7 +8,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        exclude = ('id', )
+        fields = '__all__'
 
 
 class ProductSerializer(serializers.ModelSerializer):
