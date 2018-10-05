@@ -1,6 +1,10 @@
 from django.urls import path
 
-from .views import CategoryCreateView, ProductCreateView
+from .views import (
+    CategoryCreateView,
+    ProductCreateView,
+    PaymentMethodCreateView
+)
 
 
 app_name = 'restapi'
@@ -15,5 +19,10 @@ urlpatterns = [
         'v1/products/',
         ProductCreateView.as_view(),
         name='products'
+    ),
+    path(
+        'v1/payment-methods/',
+        PaymentMethodCreateView.as_view(),
+        name='payment-methods'
     ),
 ]
