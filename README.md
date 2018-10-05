@@ -19,6 +19,7 @@ As said above, the application was built in Python, using Django, Django REST Fr
 
 Although it is not necessary, it is highly recommended to use  [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/) in the steps below, since it isolates the project's environment, allowing the development of many different projects' versions with different dependencies' versions.
 
+
 ### Installing Dependencies
 
 ```bash
