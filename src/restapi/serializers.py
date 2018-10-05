@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from website.models import Category, Product
+from website.models import Category, Product, PaymentMethod
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -17,3 +17,11 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         exclude = ('slug', )
+
+
+class PaymentMethodSerializer(serializers.ModelSerializer):
+    """ Serializer for the PaymentMethod model """
+
+    class Meta:
+        model = PaymentMethod
+        fields = '__all__'
