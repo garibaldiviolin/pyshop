@@ -1,4 +1,5 @@
 import os
+import pdb
 
 from django.urls import reverse
 from rest_framework import test, status
@@ -67,3 +68,9 @@ class ProductViewTest(test.APITransactionTestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Product.objects.count(), 1)
+
+        # remove the image uploaded after tests
+        uploaded_image_path = Product.objects.get(
+            barcode=self.product['barcode']
+        ).image.path
+        os.remove(uploaded_image_path)
