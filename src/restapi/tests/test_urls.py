@@ -10,3 +10,9 @@ class RESTAPIURLsTest(TestCase):
 
     def test_products_url(self):
         self.assertEqual(reverse('restapi:products'), '/api/v1/products/')
+
+    def test_payment_methods_url(self):
+        self.assertEqual(
+            reverse('restapi:payment-methods'),
+            '/api/v1/payment-methods/'
+        )
