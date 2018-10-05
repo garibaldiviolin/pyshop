@@ -4,8 +4,12 @@ from django.test import TestCase
 from rest_framework import serializers
 
 from pyshop.settings import BASE_DIR
-from website.models import Category, Product
-from ..serializers import CategorySerializer, ProductSerializer
+from website.models import Category, Product, PaymentMethod
+from ..serializers import (
+    CategorySerializer,
+    ProductSerializer,
+    PaymentMethodSerializer
+)
 
 
 class CategorySerializerTest(TestCase):
@@ -185,3 +189,32 @@ class ProductSerializerTest(TestCase):
             exception_serializer.is_valid(raise_exception=True)
         self.assertIn('category', exception_serializer.errors.keys())
         self.assertIn('null', str(exception_serializer.errors.values()))
+
+
+class PaymentMethodSerializerTest(TestCase):
+    """ Test case for the PaymentMethod model serializer """
+
+    def setUp(self):
+        self.payment_method = PaymentMethod(description='Cash')
+        self.serializer = PaymentMethodSerializer(instance=self.payment_method)
+        self.json = {
+            'description': '',
+        }
+
+    def test_description_content(self):
+        """ Test description field value """
+
+        self.assertEqual(
+            self.payment_method.description,
+            self.serializer.data['description']
+        )
+
+    def test_blank_description(self):
+        """ Test blank description field value """
+
+        serializer = PaymentMethodSerializer(data=self.json)
+
+        with self.assertRaises(serializers.ValidationError):
+            serializer.is_valid(raise_exception=True)
+        self.assertIn('description', serializer.errors.keys())
+        self.assertIn('blank', str(serializer.errors.values()))
