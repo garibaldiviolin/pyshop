@@ -9,7 +9,7 @@ class CategorySerializer(serializers.ModelSerializer):
     """ Serializer for the Category model """
 
     class Meta:
-        """ Meta class for the CategorySerializer """
+        """ CategorySerializer's Meta class """
 
         model = Category
         fields = '__all__'
@@ -19,7 +19,7 @@ class ProductSerializer(serializers.ModelSerializer):
     """ Serializer for the Product model """
 
     class Meta:
-        """ Meta class for the ProductSerializer """
+        """ ProductSerializer's Meta class """
 
         model = Product
         exclude = ('slug', )
@@ -29,7 +29,7 @@ class PaymentMethodSerializer(serializers.ModelSerializer):
     """ Serializer for the PaymentMethod model """
 
     class Meta:
-        """ Meta class for the PaymentMethodSerializer """
+        """ PaymentMethodSerializer's Meta class """
 
         model = PaymentMethod
         fields = '__all__'
