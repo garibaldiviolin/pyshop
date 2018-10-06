@@ -1,3 +1,5 @@
+""" Manager app forms module """
+
 from django import forms
 
 from website.models import Category, Product
