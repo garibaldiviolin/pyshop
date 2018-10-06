@@ -103,3 +103,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# pyshop test logs
+pylint_result.txt
