@@ -6,6 +6,7 @@ from website.models import Category, Product
 
 
 class CategoryEditForm(forms.ModelForm):
+    """ ModelForm for the Category model administration """
 
     class Meta:
         model = Category
@@ -13,6 +14,7 @@ class CategoryEditForm(forms.ModelForm):
 
 
 class ProductEditForm(forms.ModelForm):
+    """ ModelForm for the Product model administration """
 
     class Meta:
         model = Product
