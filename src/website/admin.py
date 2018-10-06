@@ -1,3 +1,5 @@
+""" website models registered in admin (Django) """
+
 from django.contrib import admin
 
 from .models import Category, Product, PaymentMethod, PurchaseOrder, \
