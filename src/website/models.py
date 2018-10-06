@@ -16,6 +16,8 @@ class Category(models.Model):
     )
 
     class Meta:
+        """ Category's Meta class """
+
         verbose_name = ugettext_lazy('Category')
         verbose_name_plural = ugettext_lazy('Categories')
 
@@ -44,6 +46,7 @@ class ProductBase(models.Model):
     )
 
     class Meta:
+        """ ProductBase's Meta class """
 
         abstract = True
 
@@ -64,6 +67,8 @@ class Product(ProductBase):
     '''
 
     class Meta:
+        """ Product's Meta class """
+
         verbose_name = ugettext_lazy('Product')
         verbose_name_plural = ugettext_lazy('Products')
 
@@ -91,6 +96,8 @@ class PaymentMethod(models.Model):
     )
 
     class Meta:
+        """ PaymentMethod's Meta class """
+
         verbose_name = ugettext_lazy('PaymentMethod')
         verbose_name_plural = ugettext_lazy('PaymentMethods')
 
@@ -112,6 +119,8 @@ class PurchaseOrder(models.Model):
     cart = models.BooleanField(verbose_name=ugettext_lazy('Cart'))
 
     class Meta:
+        """ PurchaseOrder's Meta class """
+
         verbose_name = ugettext_lazy('PurchaseOrder')
         verbose_name_plural = ugettext_lazy('PurchaseOrders')
 
@@ -142,6 +151,8 @@ class PurchaseItem(ProductBase):
     slug = None  # this class doesn't use this attribute
 
     class Meta:
+        """ PurchaseItem's Meta class """
+
         verbose_name = ugettext_lazy('PurchaseItem')
         verbose_name_plural = ugettext_lazy('PurchaseItems')
 
@@ -167,6 +178,8 @@ class PurchasePaymentMethod(models.Model):
     )
 
     class Meta:
+        """ PurchasePaymentMethod's Meta class """
+
         verbose_name = ugettext_lazy('PurchasePaymentMethod')
         verbose_name_plural = ugettext_lazy('PurchasePaymentMethods')
 
