@@ -9,7 +9,7 @@ class CategoryEditForm(forms.ModelForm):
     """ ModelForm for the Category model administration """
 
     class Meta:
-        """ Meta class for the CategoryEditForm """
+        """ CategoryEditForm's Meta class """
 
         model = Category
         fields = ['description']
@@ -19,7 +19,7 @@ class ProductEditForm(forms.ModelForm):
     """ ModelForm for the Product model administration """
 
     class Meta:
-        """ Meta class for the ProductEditForm """
+        """ ProductEditForm's Meta class """
 
         model = Product
         fields = [
