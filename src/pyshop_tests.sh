@@ -20,4 +20,3 @@ if [[ ! $result =~ "at 10.00/10" ]]; then
 else
     echo "pylint_runner tests OK!"
 fi
-
