@@ -20,4 +20,4 @@ class UniqueSlugGeneratorTest(TestCase):
             price=800.724, category=self.category
         )
         slug = unique_slug_generator(product)
-        self.assertEquals(slug, expected_result)
+        self.assertEqual(slug, expected_result)
