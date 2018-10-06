@@ -30,7 +30,7 @@ class CategoriesManagementView(ListView):
 
 
 class CategoryEditView(UpdateView):
-    """ ListView for editing a specific category instance """
+    """ View for editing a specific category instance """
 
     template_name = 'category_edit.html'
     form_class = CategoryEditForm
@@ -43,43 +43,58 @@ class CategoryEditView(UpdateView):
         return super(CategoryEditView, self).form_valid(form)
 
     def get_object(self, queryset=None):
+        """ Returns the category instance based on the id given """
+
         id = self.kwargs.get('id', None)
         instance = get_object_or_404(Category, id=id)
         return instance
 
 
 class CategoryDeleteView(DeleteView):
+    """ View for deleting a specific category instance """
+
     template_name = 'confirm_delete.html'
     model = Category
     success_url = reverse_lazy('manager:categories')
 
 
 class ProductsManagementView(ListView):
+    """ ListView for the Product model administration """
+
     template_name = 'products_management.html'
     context_object_name = 'products'
 
     def get_queryset(self):
+        """ Returns the list of product instances """
 
         queryset = Product.objects.all()
         return queryset
 
 
 class ProductEditView(UpdateView):
+    """ View for editing a specific product instance """
+
     template_name = 'product_edit.html'
     form_class = ProductEditForm
     success_url = reverse_lazy('manager:products')
 
     def form_valid(self, form):
+        """ Verify if the form is valid, and then save it """
+
         form.save()
         return super(ProductEditView, self).form_valid(form)
 
     def get_object(self, queryset=None):
+        """ Returns the category instance based on the slug given """
+
         slug = self.kwargs.get('slug', None)
         instance = get_object_or_404(Product, slug=slug)
         return instance
 
 
 class ProductDeleteView(DeleteView):
+    """ View for deleting a specific product instance """
+
     template_name = 'confirm_delete.html'
     model = Product
     success_url = reverse_lazy('manager:products')
