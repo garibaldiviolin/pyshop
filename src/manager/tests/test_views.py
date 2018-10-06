@@ -8,6 +8,7 @@ class IndexViewTest(TestCase):
     """ Test case for the IndexView """
 
     def test_index(self):
+        """ Test index get request """
         response = self.client.get(reverse('manager:index'))
 
         self.assertEqual(response.status_code, 200)
@@ -25,6 +26,7 @@ class CategoriesManagementViewTest(TestCase):
         self.category_queryset = Category.objects.all()
 
     def test_categories(self):
+        """ Test categories GET request """
         response = self.client.get(reverse('manager:categories'))
 
         self.assertEqual(response.status_code, 200)
@@ -46,17 +48,20 @@ class CategoryEditViewTest(TestCase):
         self.category_queryset = Category.objects.all()
 
     def test_valid_category_edit(self):
+        """ Test valid category edit GET request """
         response = self.client.get(reverse('manager:category-edit', args=(1,)))
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'category_edit.html')
 
     def test_invalid_category_edit(self):
+        """ Test invalid category edit GET request """
         response = self.client.get(reverse('manager:category-edit', args=(2,)))
 
         self.assertEqual(response.status_code, 404)
 
     def test_invalid_form(self):
+        """ Test invalid category form POST request """
         response = self.client.post(
             reverse('manager:category-edit', args=(1,)),
             {'invalid_field': 'invalid_content'}
@@ -64,6 +69,7 @@ class CategoryEditViewTest(TestCase):
         self.assertFalse(response.context['form'].is_valid())
 
     def test_valid_form(self):
+        """ Test valid category form POST request """
         response = self.client.post(
             reverse('manager:category-edit', args=(1,)),
             {'description': 'furniture'}
