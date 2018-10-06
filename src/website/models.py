@@ -164,6 +164,9 @@ class PurchaseItem(ProductBase):
 
 
 class PurchasePaymentMethod(models.Model):
+    """ The payment methods chosen by the user/customer for a specific
+    purchase order
+    """
 
     purchase_order = models.ForeignKey(
         PurchaseOrder, on_delete=models.CASCADE,
