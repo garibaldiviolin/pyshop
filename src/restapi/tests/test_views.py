@@ -1,3 +1,5 @@
+""" This module tests restapi app views """
+
 import os
 
 from django.urls import reverse
