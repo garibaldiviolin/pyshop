@@ -1,3 +1,5 @@
+""" This module tests restapi app serializers """
+
 import os
 
 from django.test import TestCase
