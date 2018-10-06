@@ -43,7 +43,6 @@ class CategoryEditView(UpdateView):
         return super(CategoryEditView, self).form_valid(form)
 
     def get_object(self, queryset=None):
-        # pdb.set_trace()
         id = self.kwargs.get('id', None)
         instance = get_object_or_404(Category, id=id)
         return instance
@@ -75,7 +74,6 @@ class ProductEditView(UpdateView):
         return super(ProductEditView, self).form_valid(form)
 
     def get_object(self, queryset=None):
-        # pdb.set_trace()
         slug = self.kwargs.get('slug', None)
         instance = get_object_or_404(Product, slug=slug)
         return instance
