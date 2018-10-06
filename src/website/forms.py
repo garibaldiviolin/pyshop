@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 
 
 class SignUpForm(UserCreationForm):
+    """ Form for the users' registragion fields """
+
     first_name = forms.CharField(
         max_length=30, required=False, help_text='Optional.'
     )
@@ -17,6 +19,8 @@ class SignUpForm(UserCreationForm):
     )
 
     class Meta:
+        """ Meta class for the SignUpForm """
+
         model = User
         fields = (
             'username', 'first_name', 'last_name',
