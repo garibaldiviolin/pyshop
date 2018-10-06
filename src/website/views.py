@@ -1,3 +1,5 @@
+""" website views """
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
@@ -14,11 +16,13 @@ from .models import Category, Product, PurchaseOrder, PurchaseItem
 
 
 class ProductsView(ListView):
+    """ ListView that shows all of (or query) the products """
 
     template_name = 'products.html'
     context_object_name = 'product_list'
 
     def get_queryset(self):
+        """ Returns the queryset of products and categories """
 
         queryset = Product.objects.all()
 
@@ -40,6 +44,9 @@ class ProductsView(ListView):
         return queryset
 
     def get_context_data(self, **kwargs):
+        """ Mounts the context objects and verifies if user is authenticated
+        """
+
         context = super(ProductsView, self).get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             context['authenticated_user'] = self.request.user
@@ -48,15 +55,21 @@ class ProductsView(ListView):
 
 
 class ProductDetailView(DetailView):
+    """ DetailView for a specific (selected) product """
 
     template_name = 'product_detail.html'
 
     def get_object(self, *args, **kwargs):
+        """ Returns the product instance by the slug field """
+
         slug = self.kwargs.get('slug')
         instance = get_object_or_404(Product, slug=slug)
         return instance
 
     def get_context_data(self, *args, **kwargs):
+        """ Mounts the context objects and verifies if user is authenticated
+        """
+
         context = super(ProductDetailView, self).get_context_data(
             *args, **kwargs
         )
@@ -66,16 +79,21 @@ class ProductDetailView(DetailView):
 
 
 class ProfileView(TemplateView):
+    """ View for the users' profiles """
 
     template_name = 'profile.html'
 
     def get(self, request, *args, **kwargs):
+        """ Check if user is authenticated, otherwise redirect to sigin page
+        """
 
         if not request.user.is_authenticated:
             return HttpResponseRedirect(reverse_lazy('website:signin'))
         return render(request, self.template_name, self.get_context_data())
 
     def get_context_data(self, *args, **kwargs):
+        """ Mounts the context objects (including user) """
+
         context = super(ProfileView, self).get_context_data(
             *args, **kwargs
         )
@@ -84,16 +102,21 @@ class ProfileView(TemplateView):
 
 
 class PurchaseOrdersView(TemplateView):
+    """ TemplateView for the user's purchase orders """
 
     template_name = 'purchase_orders.html'
 
     def get(self, request, *args, **kwargs):
+        """ Verify if user is authenticated, otherwise redirect to sigin page
+        """
 
         if not request.user.is_authenticated:
             return HttpResponseRedirect(reverse_lazy('website:signin'))
         return render(request, self.template_name, self.get_context_data())
 
     def get_context_data(self, *args, **kwargs):
+        """ Makes the purchase_orders list """
+
         context = super(PurchaseOrdersView, self).get_context_data(
             *args, **kwargs
         )
@@ -103,10 +126,13 @@ class PurchaseOrdersView(TemplateView):
 
 
 class PurchaseOrderDetailView(TemplateView):
+    """ Shows the purchase order details """
 
     template_name = 'purchase_order_detail.html'
 
     def get_context_data(self, *args, **kwargs):
+        """ Makes the purchase_order object and the purchase_items list """
+
         context = super(PurchaseOrderDetailView, self).get_context_data(
             *args, **kwargs
         )
@@ -122,8 +148,13 @@ class PurchaseOrderDetailView(TemplateView):
 
 
 class CompletePurchaseOrderView(DetailView):
+    """ DetailView that changes the purchase order's status (to complete) """
 
     def get(self, request, *args, **kwargs):
+        """ Receives the purchase order's id and changes the cart field to
+        False, meaning that the purchase order is completed. After changing
+        the status, redirect to the index page
+        """
         id = self.kwargs.get('id')
 
         purchase_order = get_object_or_404(PurchaseOrder, id=id)
@@ -134,10 +165,14 @@ class CompletePurchaseOrderView(DetailView):
 
 
 class SignInView(TemplateView):
+    """ TemplateView for the user's login """
 
     template_name = 'signin.html'
 
     def post(self, request, *args, **kwargs):
+        """ Receives the username and password, tries to do the login, and
+        then redirect to the index page
+        """
 
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -154,8 +189,12 @@ class SignInView(TemplateView):
 
 
 class SignOutView(View):
+    """ View for the user's logout """
 
     def get(self, request, *args, **kwargs):
+        """ Sign the user out and then redirect to the previously accessed
+        page
+        """
 
         logout(request)
         previous_url = request.META.get('HTTP_REFERER')
@@ -164,20 +203,29 @@ class SignOutView(View):
 
 
 class SignUpView(CreateView):
+    """ CreateView for the users' registration """
 
     template_name = 'signup.html'
     form_class = SignUpForm
     success_url = reverse_lazy('website:index')
 
     def form_valid(self, form):
+        """ Check if form is valid and then save it """
 
         form.save()
         return super().form_valid(form)
 
 
 class AddToCartView(View):
+    """ View to add item to user's cart """
 
     def post(self, request, *args, **kwargs):
+        """ Check if user is authenticated, otherwise redirect to the sigin
+        Then it expects the product_id that the user wants to add to the cart.
+        If the user doesn't have any pending purchase order (cart=True), a new
+        order is created, with the new item, and the user is redirected to the
+        previously accessed page.
+        """
 
         previous_url = request.META.get('HTTP_REFERER')
 
