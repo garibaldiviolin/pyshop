@@ -19,7 +19,7 @@ class SignUpForm(UserCreationForm):
     )
 
     class Meta:
-        """ Meta class for the SignUpForm """
+        """ SignUpForm's Meta class """
 
         model = User
         fields = (
