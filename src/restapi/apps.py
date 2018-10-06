@@ -1,3 +1,5 @@
+""" restapi apps' module """
+
 from django.apps import AppConfig
 
 
