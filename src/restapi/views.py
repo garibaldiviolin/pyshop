@@ -1,3 +1,5 @@
+""" restapi views """
+
 from rest_framework.generics import CreateAPIView
 
 from website.models import Category, Product, PaymentMethod
