@@ -1,3 +1,5 @@
+""" Manager app views module """
+
 from django.shortcuts import get_object_or_404
 
 from django.urls import reverse_lazy
@@ -9,26 +11,34 @@ from .forms import CategoryEditForm, ProductEditForm
 
 
 class IndexView(TemplateView):
+    """ Manager app view for the main page """
 
     template_name = 'index.html'
 
 
 class CategoriesManagementView(ListView):
+    """ ListView for the Category model administration """
+
     template_name = 'categories_management.html'
     context_object_name = 'categories'
 
     def get_queryset(self):
+        """ Returns the list of category instances """
 
         queryset = Category.objects.all()
         return queryset
 
 
 class CategoryEditView(UpdateView):
+    """ ListView for editing a specific category instance """
+
     template_name = 'category_edit.html'
     form_class = CategoryEditForm
     success_url = reverse_lazy('manager:categories')
 
     def form_valid(self, form):
+        """ Verify if the form is valid, and then save it """
+
         form.save()
         return super(CategoryEditView, self).form_valid(form)
 
