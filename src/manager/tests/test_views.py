@@ -88,7 +88,7 @@ class CategoryDeleteViewTest(TestCase):
 
         self.category_queryset = Category.objects.all()
 
-    def test_valid_category_edit(self):
+    def test_valid_category_delete(self):
         """ Test valid category delete GET request """
         response = self.client.get(
             reverse('manager:category-delete', args=(1,))
@@ -97,7 +97,7 @@ class CategoryDeleteViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'confirm_delete.html')
 
-    def test_invalid_category_edit(self):
+    def test_invalid_category_delete(self):
         """ Test invalid category delete GET request """
         response = self.client.get(
             reverse('manager:category-delete', args=(2,))
@@ -122,8 +122,8 @@ class ProductsManagementViewTest(TestCase):
         self.category_queryset = Category.objects.all()
         self.product_queryset = Product.objects.all()
 
-    def test_categories(self):
-        """ Test valid product GET request """
+    def test_products(self):
+        """ Test valid products GET request """
         response = self.client.get(reverse('manager:products'))
 
         self.assertEqual(response.status_code, 200)
@@ -200,8 +200,8 @@ class ProductDeleteViewTest(TestCase):
             category=self.category
         )
 
-    def test_valid_category_edit(self):
-        """ Test valid product edit POST request """
+    def test_valid_product_delete(self):
+        """ Test valid product delete POST request """
         response = self.client.get(
             reverse('manager:product-delete', args=(self.product.slug,))
         )
@@ -209,8 +209,8 @@ class ProductDeleteViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'confirm_delete.html')
 
-    def test_invalid_category_edit(self):
-        """ Test invalid product edit POST request """
+    def test_invalid_product_delete(self):
+        """ Test invalid product delete POST request """
         response = self.client.get(
             reverse('manager:product-delete', args=(2,))
         )
