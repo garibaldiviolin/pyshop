@@ -1,3 +1,5 @@
+""" This module tests manager app urls """
+
 from django.urls import reverse
 from django.test import TestCase
 
