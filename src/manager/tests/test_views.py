@@ -89,6 +89,7 @@ class CategoryDeleteViewTest(TestCase):
         self.category_queryset = Category.objects.all()
 
     def test_valid_category_edit(self):
+        """ Test valid category delete GET request """
         response = self.client.get(
             reverse('manager:category-delete', args=(1,))
         )
@@ -97,6 +98,7 @@ class CategoryDeleteViewTest(TestCase):
         self.assertTemplateUsed(response, 'confirm_delete.html')
 
     def test_invalid_category_edit(self):
+        """ Test invalid category delete GET request """
         response = self.client.get(
             reverse('manager:category-delete', args=(2,))
         )
@@ -121,6 +123,7 @@ class ProductsManagementViewTest(TestCase):
         self.product_queryset = Product.objects.all()
 
     def test_categories(self):
+        """ Test valid product GET request """
         response = self.client.get(reverse('manager:products'))
 
         self.assertEqual(response.status_code, 200)
@@ -145,6 +148,7 @@ class ProductEditViewTest(TestCase):
         )
 
     def test_valid_product_edit(self):
+        """ Test valid product edit GET request """
         response = self.client.get(
             reverse('manager:product-edit', args=(self.product.slug,))
         )
@@ -153,11 +157,13 @@ class ProductEditViewTest(TestCase):
         self.assertTemplateUsed(response, 'product_edit.html')
 
     def test_invalid_product_edit(self):
+        """ Test invalid product edit GET request """
         response = self.client.get(reverse('manager:product-edit', args=(2,)))
 
         self.assertEqual(response.status_code, 404)
 
     def test_invalid_form(self):
+        """ Test valid product form POST request """
         response = self.client.post(
             reverse('manager:product-edit', args=(self.product.slug,)),
             {'invalid_field': 'invalid_content'}
@@ -165,6 +171,7 @@ class ProductEditViewTest(TestCase):
         self.assertFalse(response.context['form'].is_valid())
 
     def test_valid_form(self):
+        """ Test valid product form POST request """
         response = self.client.post(
             reverse('manager:product-edit', args=(self.product.slug,)),
             {
@@ -181,7 +188,7 @@ class ProductEditViewTest(TestCase):
 
 
 class ProductDeleteViewTest(TestCase):
-    """ Test case for the CategoryDeleteView """
+    """ Test case for the ProductDeleteView """
 
     def setUp(self):
         self.category = Category.objects.create(
@@ -194,6 +201,7 @@ class ProductDeleteViewTest(TestCase):
         )
 
     def test_valid_category_edit(self):
+        """ Test valid product edit POST request """
         response = self.client.get(
             reverse('manager:product-delete', args=(self.product.slug,))
         )
@@ -202,6 +210,7 @@ class ProductDeleteViewTest(TestCase):
         self.assertTemplateUsed(response, 'confirm_delete.html')
 
     def test_invalid_category_edit(self):
+        """ Test invalid product edit POST request """
         response = self.client.get(
             reverse('manager:product-delete', args=(2,))
         )
