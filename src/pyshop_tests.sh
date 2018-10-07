@@ -16,6 +16,8 @@ else
     echo "Coverage tests OK!"
 fi
 
+rm coverage_result.txt
+
 # verify code with pylint_runner (uses pylint)
 pylint_runner > pylint_result.txt
 result=`head -n-1 pylint_result.txt | tail -n 1`
