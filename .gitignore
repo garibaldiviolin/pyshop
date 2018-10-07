@@ -106,3 +106,4 @@ ENV/
 
 # pyshop test logs
 pylint_result.txt
+coverage_result.txt
