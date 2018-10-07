@@ -15,6 +15,8 @@ class UniqueSlugGeneratorTest(TestCase):
         )
 
     def test_slug(self):
+        """ Test generation of a slug """
+
         expected_result = 'new-mattress'
         product = Product(
             barcode='5901234123457', title='New Mattress',
