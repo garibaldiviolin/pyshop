@@ -11,6 +11,8 @@ class BrazilianPortugueseTest(TestCase):
         self.client.LANGUAGE_CODE = 'pt-br'
 
     def test_translated_strings(self):
+        """ Test translation of strings to 'pt-br' language """
+
         self.assertEqual('Desconectar', ugettext_lazy('SignOut'))
         self.assertEqual('Página Inicial', ugettext_lazy('HomePage'))
         self.assertEqual('Título', ugettext_lazy('Title'))
@@ -68,6 +70,8 @@ class EnglishTest(TestCase):
         self.client.LANGUAGE_CODE = 'en'
 
     def test_translated_strings(self):
+        """ Test translation of strings to 'en' language """
+
         self.assertEqual('Sign Out', ugettext_lazy('SignOut'))
         self.assertEqual('Home Page', ugettext_lazy('HomePage'))
         self.assertEqual('Title', ugettext_lazy('Title'))
