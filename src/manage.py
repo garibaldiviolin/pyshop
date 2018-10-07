@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+
+""" Django utility module """
+
 import os
 import sys
 
