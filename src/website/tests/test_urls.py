@@ -1,3 +1,5 @@
+""" This module tests website app urls """
+
 from django.urls import reverse
 from django.test import TestCase
 

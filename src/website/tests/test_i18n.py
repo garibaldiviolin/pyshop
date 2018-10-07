@@ -1,3 +1,5 @@
+""" This module tests website app internationalization strings """
+
 from django.test import TestCase
 from django.utils.translation import ugettext_lazy
 from django.utils.translation import activate

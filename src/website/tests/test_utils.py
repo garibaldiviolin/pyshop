@@ -1,3 +1,5 @@
+""" This module tests website app util methods """
+
 from django.test import TestCase
 
 from website.models import Category, Product
