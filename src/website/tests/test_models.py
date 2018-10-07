@@ -20,10 +20,14 @@ class CategoryModelTest(TestCase):
     description_update = 'Test321'
 
     def test_instance(self):
+        """ Test category Category constructor """
+
         category = Category(description=self.description)
         self.assertIsInstance(category, Category)
 
     def test_creation(self):
+        """ Test creation of Category instance in the database """
+
         created_category = Category.objects.create(
             description=self.description
         )
@@ -31,11 +35,13 @@ class CategoryModelTest(TestCase):
         self.assertEqual(created_category, queried_category)
 
     def test_str(self):
+        """ Test Category __str__ method """
         expected_result = self.description
         category = Category(description=self.description)
         self.assertEqual(str(category), expected_result)
 
     def test_repr(self):
+        """ Test Category __repr__ method """
         category = Category(description=self.description)
         expected_result = self.description
         self.assertEqual(repr(category), expected_result)
@@ -55,6 +61,8 @@ class ProductModelTest(TestCase):
     price = 800.724
 
     def test_instance(self):
+        """ Test Product model constructor """
+
         product = Product(
             barcode=self.barcode, slug=self.slug, title=self.title,
             description=self.description, image=self.image, price=self.price,
@@ -63,6 +71,8 @@ class ProductModelTest(TestCase):
         self.assertIsInstance(product, Product)
 
     def test_creation(self):
+        """ Test creation of Product instance in the database """
+
         created_product = Product.objects.create(
             barcode=self.barcode, slug=self.slug, title=self.title,
             description=self.description, image=self.image, price=self.price,
@@ -72,6 +82,8 @@ class ProductModelTest(TestCase):
         self.assertEqual(created_product, queried_product)
 
     def test_duplicate_product_creation(self):
+        """ Test creation of a duplicate Product in the database """
+
         Product.objects.create(
             barcode=self.barcode, slug=self.slug, title=self.title,
             description=self.description, image=self.image, price=self.price,
@@ -85,6 +97,8 @@ class ProductModelTest(TestCase):
             )
 
     def test_str(self):
+        """ Test Product __str__ method """
+
         expected_result = self.title
         product = Product(
             barcode=self.barcode, slug=self.slug, title=self.title,
@@ -94,6 +108,8 @@ class ProductModelTest(TestCase):
         self.assertEqual(str(product), expected_result)
 
     def test_repr(self):
+        """ Test product __repr__ method """
+
         expected_result = self.title
         product = Product(
             barcode=self.barcode, slug=self.slug, title=self.title,
@@ -109,10 +125,14 @@ class PaymentMethodTest(TestCase):
     description = 'Test123'
 
     def test_instance(self):
+        """ Test PurchaseOrder model constructor """
+
         payment_method = PaymentMethod(description=self.description)
         self.assertIsInstance(payment_method, PaymentMethod)
 
     def test_creation(self):
+        """ Test creation of PaymentMethod instance in the database """
+
         created_payment_method = PaymentMethod.objects.create(
             description=self.description
         )
@@ -122,11 +142,15 @@ class PaymentMethodTest(TestCase):
         self.assertEqual(created_payment_method, queried_payment_method)
 
     def test_str(self):
+        """ Test PaymentMethod __str__ method """
+
         expected_result = self.description
         payment_method = PaymentMethod(description=self.description)
         self.assertEqual(str(payment_method), expected_result)
 
     def test_repr(self):
+        """ Test PaymentMethod __repr__ method """
+
         payment_method = PaymentMethod(description=self.description)
         expected_result = self.description
         self.assertEqual(repr(payment_method), expected_result)
@@ -149,6 +173,8 @@ class PurchaseOrderTest(TestCase):
         )
 
     def test_instance(self):
+        """ Test PurchaseOrder model constructor """
+
         purchase_order = PurchaseOrder(
             timestamp=timezone.now(),
             user=self.user,
@@ -157,6 +183,8 @@ class PurchaseOrderTest(TestCase):
         self.assertIsInstance(purchase_order, PurchaseOrder)
 
     def test_creation(self):
+        """ Test creation of PurchaseOrder instance in the database """
+
         created_purchase_order = PurchaseOrder.objects.create(
             timestamp=timezone.now(),
             user=self.user,
@@ -168,6 +196,8 @@ class PurchaseOrderTest(TestCase):
         self.assertEqual(created_purchase_order, queried_purchase_order)
 
     def test_str(self):
+        """ Test PurchaseOrder __str__ method """
+
         expected_result = self.description_str_method
         purchase_order = PurchaseOrder.objects.create(
             timestamp=timezone.now(),
@@ -177,6 +207,8 @@ class PurchaseOrderTest(TestCase):
         self.assertEqual(str(purchase_order), expected_result)
 
     def test_repr(self):
+        """ Test PurchaseOrder __repr__ method """
+
         purchase_order = PurchaseOrder.objects.create(
             timestamp=timezone.now(),
             user=self.user,
@@ -212,6 +244,8 @@ class PurchaseItemTest(TestCase):
         )
 
     def test_instance(self):
+        """ Test PurchaseItem model constructor """
+
         purchase_item = PurchaseItem(
             purchase_order=self.created_purchase_order,
             quantity=1.0,
@@ -222,6 +256,8 @@ class PurchaseItemTest(TestCase):
         self.assertIsInstance(purchase_item, PurchaseItem)
 
     def test_creation(self):
+        """ Test creation of PurchaseItem instance in the database """
+
         created_purchase_item = PurchaseItem.objects.create(
             purchase_order=self.created_purchase_order,
             quantity=1.0,
@@ -235,6 +271,8 @@ class PurchaseItemTest(TestCase):
         self.assertEqual(created_purchase_item, queried_purchase_item)
 
     def test_str(self):
+        """ Test PurchaseItem __str__ method """
+
         expected_result = '1'
         purchase_item = PurchaseItem.objects.create(
             purchase_order=self.created_purchase_order,
@@ -246,6 +284,8 @@ class PurchaseItemTest(TestCase):
         self.assertEqual(str(purchase_item), expected_result)
 
     def test_repr(self):
+        """ Test PurchaseItem __repr__ method """
+
         expected_result = '1'
         purchase_item = PurchaseItem.objects.create(
             purchase_order=self.created_purchase_order,
@@ -285,6 +325,8 @@ class PurchasePaymentMethodTest(TestCase):
         )
 
     def test_instance(self):
+        """ Test PurchasePaymentMethod model constructor """
+
         created_purchase_payment_method = PurchasePaymentMethod(
             purchase_order=self.purchase_order,
             payment_method=self.payment_method,
@@ -295,6 +337,8 @@ class PurchasePaymentMethodTest(TestCase):
         )
 
     def test_creation(self):
+        """ Test creation of PurchasePaymentMethod instance in the database """
+
         created_purchase_payment_method = PurchasePaymentMethod.objects.create(
             purchase_order=self.purchase_order,
             payment_method=self.payment_method,
@@ -308,6 +352,8 @@ class PurchasePaymentMethodTest(TestCase):
         )
 
     def test_str(self):
+        """ Test PurchasePaymentMethod __str__ method """
+
         expected_result = '1'
         purchase_payment_method = PurchasePaymentMethod.objects.create(
             purchase_order=self.purchase_order,
@@ -317,6 +363,8 @@ class PurchasePaymentMethodTest(TestCase):
         self.assertEqual(str(purchase_payment_method), expected_result)
 
     def test_repr(self):
+        """ Test PurchasePaymentMethod __repr__ method """
+
         expected_result = '1'
         purchase_payment_method = PurchasePaymentMethod.objects.create(
             purchase_order=self.purchase_order,
