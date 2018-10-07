@@ -10,6 +10,7 @@ from .utils import unique_slug_generator
 
 
 class Category(models.Model):
+    """ Categories of products """
 
     description = models.CharField(
         max_length=50, verbose_name=ugettext_lazy('Description')
@@ -29,6 +30,8 @@ class Category(models.Model):
 
 
 class ProductBase(models.Model):
+    """ Class that represents a abstraction for both Product and PurchaseItem.
+    It contains common fields between the two models """
 
     barcode = models.CharField(
         primary_key=True, max_length=20,
@@ -90,6 +93,7 @@ pre_save.connect(pre_save_product_receiver, sender=Product)
 
 
 class PaymentMethod(models.Model):
+    """ The possible methods of payments for the new purchase orders """
 
     description = models.CharField(
         unique=True, max_length=50, verbose_name=ugettext_lazy('Description')
@@ -109,6 +113,7 @@ class PaymentMethod(models.Model):
 
 
 class PurchaseOrder(models.Model):
+    """ The acquisition's header fields """
 
     timestamp = models.DateTimeField(verbose_name=ugettext_lazy('Timestamp'))
     user = models.ForeignKey(
@@ -132,6 +137,7 @@ class PurchaseOrder(models.Model):
 
 
 class PurchaseItem(ProductBase):
+    """ The products of a specific PurchaseOrder """
 
     id = models.AutoField(primary_key=True)
     barcode = models.CharField(
