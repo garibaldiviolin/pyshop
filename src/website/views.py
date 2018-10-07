@@ -26,16 +26,16 @@ class ProductsView(ListView):
 
         queryset = Product.objects.all()
 
-        category = self.request.GET.get('category', '')
+        category = self.request.GET.get('category', None)
 
-        if len(category) > 0:
+        if category:
             queryset = queryset.filter(
                 category__description=category
             )
 
-        q = self.request.GET.get('q', '')
+        q = self.request.GET.get('q', None)
 
-        if len(q) > 0:
+        if q:
             queryset = queryset.filter(
                 Q(title__icontains=q) |
                 Q(description__icontains=q)
