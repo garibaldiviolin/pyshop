@@ -1,7 +1,13 @@
 # verify tests coverage
-coverage run --source ./ ./manage.py test manager restapi website &> /dev/null
-result=`coverage report | tail -c 5`
+coverage run --source ./ ./manage.py test manager restapi website &> coverage_result.txt
+set result=`head -n-1 coverage_result.txt | tail -n 1`
+if [ $result != "OK" ]; then
+    echo "PyShop tests failed."
+else
+    echo "PyShop tests OK!"
+fi
 
+result=`coverage report | tail -c 5`
 if [ $result != "100%" ]; then
     coverage report
     echo "Coverage tests failed."
