@@ -1,3 +1,5 @@
+""" website's urls module """
+
 from django.urls import path
 
 from .views import ProductsView, SignInView, SignOutView, SignUpView, \

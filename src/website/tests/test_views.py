@@ -34,6 +34,8 @@ class ProductsViewTest(TestCase):
         self.category_queryset = Category.objects.all()
 
     def test_list_products(self):
+        """ Test list products (GET request) """
+
         response = self.client.get(reverse('website:index'))
 
         self.assertEqual(response.status_code, 200)
@@ -47,6 +49,8 @@ class ProductsViewTest(TestCase):
         )
 
     def test_query_products(self):
+        """ Test product filter / query (GET request) """
+
         response = self.client.get(
             reverse('website:index'),
             {
@@ -66,6 +70,8 @@ class ProductsViewTest(TestCase):
         )
 
     def test_not_logged_user(self):
+        """ Test GET request without logging with a user """
+
         self.client.logout()
         response = self.client.get(
             reverse('website:index'),
@@ -94,6 +100,8 @@ class ProductDetailViewTest(TestCase):
         )
 
     def test_product_detail(self):
+        """ Test product detail GET request """
+
         response = self.client.get(
             reverse('website:product-detail', args=(self.product.slug,))
         )
@@ -101,6 +109,8 @@ class ProductDetailViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_not_logged_user(self):
+        """ Test GET request without logging with a user """
+
         self.client.logout()
         response = self.client.get(
             reverse('website:product-detail', args=(self.product.slug,))
@@ -123,12 +133,16 @@ class ProfileViewTest(TestCase):
         )
 
     def test_product_detail(self):
+        """ Test GET request """
+
         response = self.client.get(reverse('website:profile'))
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'profile.html')
 
     def test_not_logged_user(self):
+        """ Test GET request without logging with a user """
+
         self.client.logout()
         response = self.client.get(reverse('website:profile'))
 
@@ -156,12 +170,16 @@ class PurchaseOrdersViewTest(TestCase):
         )
 
     def test_purchase_orders(self):
+        """ Test purchase orders (GET request) """
+
         response = self.client.get(reverse('website:purchase-orders'))
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'purchase_orders.html')
 
     def test_not_logged_user(self):
+        """ Test GET request without logging with a user """
+
         self.client.logout()
         response = self.client.get(reverse('website:purchase-orders'))
 
@@ -200,6 +218,8 @@ class PurchaseOrderDetailViewTest(TestCase):
         )
 
     def test_purchase_order_detail(self):
+        """ Test purchase order detail (GET request) """
+
         response = self.client.get(
             reverse('website:purchase-order', args=(self.purchase_order.id,))
         )
@@ -208,6 +228,8 @@ class PurchaseOrderDetailViewTest(TestCase):
         self.assertTemplateUsed(response, 'purchase_order_detail.html')
 
     def test_invalid_purchase_order_detail(self):
+        """ Test invalid purchase order detail (GET request) """
+
         response = self.client.get(
             reverse('website:purchase-order', args=(2,))
         )
@@ -236,6 +258,8 @@ class CompletePurchaseOrderViewTest(TestCase):
         )
 
     def test_complete_purchase_order(self):
+        """ Test complete status of purchase order (GET request) """
+
         response = self.client.get(reverse(
             'website:complete-purchase-order', args=(self.purchase_order.id,)
         ))
@@ -243,6 +267,8 @@ class CompletePurchaseOrderViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_complete_invalid_purchase_order(self):
+        """ Test complete status of a invalid purchase order (GET request) """
+
         response = self.client.get(reverse(
             'website:complete-purchase-order', args=(2,)
         ))
@@ -260,12 +286,16 @@ class SignInViewTest(TestCase):
         self.user.save()
 
     def test_get_sigin(self):
+        """ Test user sigin (GET request) """
+
         response = self.client.get(reverse('website:signin'))
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'signin.html')
 
     def test_post_sigin(self):
+        """ Test user sigin (POST request) """
+
         self.user.save()
         response = self.client.post(
             reverse('website:signin'),
@@ -278,6 +308,8 @@ class SignInViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_invalid_user(self):
+        """ Test invalid user sigin (POST request) """
+
         response = self.client.post(
             reverse('website:signin'),
             {
@@ -289,6 +321,8 @@ class SignInViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_inactive_user(self):
+        """ Test inactive user sigin (POST request) """
+
         self.user.is_active = False  # change to inactive to test
         self.user.save()
         response = self.client.post(
@@ -312,6 +346,8 @@ class SignOutViewTest(TestCase):
         )
 
     def teste_signout(self):
+        """ Test user signout (GET request) """
+
         response = self.client.get(reverse('website:signout'))
         self.assertEqual(response.status_code, 302)
 
@@ -320,12 +356,16 @@ class SignUpViewTest(TestCase):
     """ Test case for the SignUpView """
 
     def test_get(self):
+        """ Test user signup (GET request) """
+
         response = self.client.get(reverse('website:signup'))
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'signup.html')
 
     def test_post_valid_user(self):
+        """ Test user signup (POST request) """
+
         response = self.client.post(
             reverse('website:signup'),
             {
@@ -340,6 +380,8 @@ class SignUpViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_post_invalid_user(self):
+        """ Test invalid user signup (POST request) """
+
         response = self.client.post(
             reverse('website:signup'),
             {
@@ -376,6 +418,10 @@ class AddToCartViewTest(TestCase):
         )
 
     def test_add_valid_product(self):
+        """ Test addition of valid product to user's purchase order (POST
+        request)
+        """
+
         response = self.client.post(
             reverse('website:add-to-cart'),
             {
@@ -385,6 +431,10 @@ class AddToCartViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_add_invalid_product(self):
+        """ Test addition of invalid product to user's purchase order (POST
+        request)
+        """
+
         response = self.client.post(
             reverse('website:add-to-cart'),
             {
@@ -394,6 +444,10 @@ class AddToCartViewTest(TestCase):
         self.assertEqual(response.status_code, 404)
 
     def test_new_purchase_order(self):
+        """ Test addition of valid product to a user's new purchase order (POST
+        request)
+        """
+
         self.purchase_order.cart = True
         self.purchase_order.save()
         response = self.client.post(
@@ -405,6 +459,8 @@ class AddToCartViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_not_logged_user(self):
+        """ Test POST request without logging with a user """
+
         self.client.logout()
         response = self.client.post(
             reverse('website:add-to-cart'),

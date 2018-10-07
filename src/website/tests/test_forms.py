@@ -30,24 +30,34 @@ class SignUpFormTest(TestCase):
         )
 
     def test_valid_form(self):
+        """ Test valid SignUp form """
+
         self.assertTrue(self.form.is_valid())
 
     def test_remove_username(self):
+        """ Test invalid SignUp form (removing username) """
+
         invalid_form = self.form
         del invalid_form.data['email']
         self.assertFalse(invalid_form.is_valid())
 
     def test_invalid_email(self):
+        """ Test invalid SignUpForm email """
+
         invalid_form = self.form
         invalid_form.data['email'] = 'ok'
         self.assertFalse(invalid_form.is_valid())
 
     def test_invalid_password1(self):
+        """ Test invalid SignUpForm password1 """
+
         invalid_form = self.form
         invalid_form.data['password1'] = 'ok'
         self.assertFalse(invalid_form.is_valid())
 
     def test_invalid_password2(self):
+        """ Test invalid SignUpForm password2 """
+
         invalid_form = self.form
         invalid_form.data['password2'] = 'ok'
         self.assertFalse(invalid_form.is_valid())
