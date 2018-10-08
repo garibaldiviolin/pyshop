@@ -1,5 +1,8 @@
 """ website views module """
 
+# pylint: disable=W0613, W0221
+
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
@@ -66,13 +69,11 @@ class ProductDetailView(DetailView):
         instance = get_object_or_404(Product, slug=slug)
         return instance
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         """ Mounts the context objects and verifies if user is authenticated
         """
 
-        context = super(ProductDetailView, self).get_context_data(
-            *args, **kwargs
-        )
+        context = super(ProductDetailView, self).get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             context['authenticated_user'] = self.request.user
         return context
@@ -89,14 +90,14 @@ class ProfileView(TemplateView):
 
         if not request.user.is_authenticated:
             return HttpResponseRedirect(reverse_lazy('website:signin'))
-        return render(request, self.template_name, self.get_context_data())
+        return render(
+            request, self.template_name, self.get_context_data(**kwargs)
+        )
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         """ Mounts the context objects (including user) """
 
-        context = super(ProfileView, self).get_context_data(
-            *args, **kwargs
-        )
+        context = super(ProfileView, self).get_context_data(**kwargs)
         context['user'] = self.request.user
         return context
 
@@ -114,12 +115,10 @@ class PurchaseOrdersView(TemplateView):
             return HttpResponseRedirect(reverse_lazy('website:signin'))
         return render(request, self.template_name, self.get_context_data())
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         """ Makes the purchase_orders list """
 
-        context = super(PurchaseOrdersView, self).get_context_data(
-            *args, **kwargs
-        )
+        context = super(PurchaseOrdersView, self).get_context_data(**kwargs)
         context['purchase_orders'] = PurchaseOrder.objects.all() \
             .order_by('id').order_by('-cart')
         return context
@@ -130,11 +129,11 @@ class PurchaseOrderDetailView(TemplateView):
 
     template_name = 'purchase_order_detail.html'
 
-    def get_context_data(self, *args, **kwargs):
+    def get_context_data(self, **kwargs):
         """ Makes the purchase_order object and the purchase_items list """
 
         context = super(PurchaseOrderDetailView, self).get_context_data(
-            *args, **kwargs
+            **kwargs
         )
         id = self.kwargs.get('id')
         purchase_order = get_object_or_404(PurchaseOrder, id=id)
@@ -169,7 +168,7 @@ class SignInView(TemplateView):
 
     template_name = 'signin.html'
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):  # pylint: disable=R0201
         """ Receives the username and password, tries to do the login, and
         then redirect to the index page
         """
@@ -191,7 +190,7 @@ class SignInView(TemplateView):
 class SignOutView(View):
     """ View for the user's logout """
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):  # pylint: disable=R0201
         """ Sign the user out and then redirect to the previously accessed
         page
         """
