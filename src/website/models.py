@@ -55,19 +55,6 @@ class ProductBase(models.Model):
 
         abstract = True
 
-    def __str__(self):
-        return 'ProductBase - {}'.format(self.title)
-
-    def __repr__(self):
-        return ('ProductBase(barcode={},title={},description={},'
-                'price={},category={})').format(
-            self.barcode,
-            self.title,
-            self.description,
-            self.price,
-            self.category
-        )
-
 
 class Product(ProductBase):
     '''
