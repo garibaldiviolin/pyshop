@@ -21,8 +21,9 @@ if not %ERRORLEVEL% == 0 (
     echo "Coverage tests OK!"
 )
 
+rem Remove coverage logs
 del coverage_result.txt
-
+del .coverage
 
 rem verify code with pylint_runner (uses pylint)
 pylint_runner > pylint_result.txt
