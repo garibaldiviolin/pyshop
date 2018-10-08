@@ -1,5 +1,7 @@
 """ website models """
 
+# pylint: disable=W0613
+
 from django.conf import settings
 from django.db.models.signals import pre_save
 from django.db import models
@@ -81,10 +83,14 @@ class Product(ProductBase):
     slug = models.SlugField(unique=True)
 
     def get_absolute_url(self):
+        """ Returns the entire product endpoint (product-detail
+        endpoint + slug field)
+        """
         return reverse('website:product-detail', kwargs={'slug': self.slug})
 
 
 def pre_save_product_receiver(sender, instance, *args, **kwargs):
+    """ Generates the slug field before saving the product instance """
     if not instance.slug:
         instance.slug = unique_slug_generator(instance)
 
