@@ -1,4 +1,4 @@
-# verify tests coverage
+# Verify django tests
 coverage run --source ./ ./manage.py test manager restapi website &> coverage_result.txt
 set result=`head -n-1 coverage_result.txt | tail -n 1`
 if [ $result != "OK" ]; then
@@ -7,6 +7,7 @@ else
     echo "PyShop tests OK!"
 fi
 
+# Verify coverage tests
 result=`coverage report | tail -c 5`
 if [ $result != "100%" ]; then
     coverage report
@@ -16,9 +17,11 @@ else
     echo "Coverage tests OK!"
 fi
 
+# Remove coverage logs
 rm coverage_result.txt
+rm .coverage
 
-# verify code with pylint_runner (uses pylint)
+# Verify code with pylint_runner (uses pylint)
 pylint_runner > pylint_result.txt
 result=`head -n-1 pylint_result.txt | tail -n 1`
 if [[ ! $result =~ "at 10.00/10" ]]; then
