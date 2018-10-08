@@ -38,14 +38,16 @@ class CategoryModelTest(TestCase):
 
     def test_str(self):
         """ Test Category __str__ method """
-        expected_result = self.description
+
+        expected_result = 'Category - Test123'
         category = Category(description=self.description)
         self.assertEqual(str(category), expected_result)
 
     def test_repr(self):
         """ Test Category __repr__ method """
+
+        expected_result = 'Category(description=Test123)'
         category = Category(description=self.description)
-        expected_result = self.description
         self.assertEqual(repr(category), expected_result)
 
 
@@ -101,22 +103,24 @@ class ProductModelTest(TestCase):
     def test_str(self):
         """ Test Product __str__ method """
 
-        expected_result = self.title
+        expected_result = 'Product - Mattress'
         product = Product(
             barcode=self.barcode, slug=self.slug, title=self.title,
             description=self.description, image=self.image, price=self.price,
-            category_id=self.category.id
+            category=self.category
         )
         self.assertEqual(str(product), expected_result)
 
     def test_repr(self):
         """ Test product __repr__ method """
 
-        expected_result = self.title
+        expected_result = 'Product(barcode=5901234123457,title=Mattress,' \
+                          'description=Mattress,price=800.724,' \
+                          'category=Category,slug=None)'
         product = Product(
             barcode=self.barcode, slug=self.slug, title=self.title,
             description=self.description, image=self.image, price=self.price,
-            category_id=self.category.id
+            category=self.category
         )
         self.assertEqual(repr(product), expected_result)
 
@@ -146,15 +150,15 @@ class PaymentMethodTest(TestCase):
     def test_str(self):
         """ Test PaymentMethod __str__ method """
 
-        expected_result = self.description
+        expected_result = 'PaymentMethod - Test123'
         payment_method = PaymentMethod(description=self.description)
         self.assertEqual(str(payment_method), expected_result)
 
     def test_repr(self):
         """ Test PaymentMethod __repr__ method """
 
+        expected_result = 'PaymentMethod(description=Test123)'
         payment_method = PaymentMethod(description=self.description)
-        expected_result = self.description
         self.assertEqual(repr(payment_method), expected_result)
 
 
@@ -200,7 +204,7 @@ class PurchaseOrderTest(TestCase):
     def test_str(self):
         """ Test PurchaseOrder __str__ method """
 
-        expected_result = self.description_str_method
+        expected_result = 'PurchaseOrder - 1'
         purchase_order = PurchaseOrder.objects.create(
             timestamp=timezone.now(),
             user=self.user,
@@ -212,11 +216,12 @@ class PurchaseOrderTest(TestCase):
         """ Test PurchaseOrder __repr__ method """
 
         purchase_order = PurchaseOrder.objects.create(
-            timestamp=timezone.now(),
+            timestamp='2018-10-08 13:49:00+03:00',
             user=self.user,
             cart=False
         )
-        expected_result = self.description_repr_method
+        expected_result = 'PurchaseOrder(id=1,timestamp=2018-10-08 ' \
+                          '13:49:00+03:00,user=user12,cart=False)'
         self.assertEqual(repr(purchase_order), expected_result)
 
 
@@ -275,7 +280,7 @@ class PurchaseItemTest(TestCase):
     def test_str(self):
         """ Test PurchaseItem __str__ method """
 
-        expected_result = '1'
+        expected_result = 'PurchaseItem 1 - order 1'
         purchase_item = PurchaseItem.objects.create(
             purchase_order=self.created_purchase_order,
             quantity=1.0,
@@ -288,7 +293,8 @@ class PurchaseItemTest(TestCase):
     def test_repr(self):
         """ Test PurchaseItem __repr__ method """
 
-        expected_result = '1'
+        expected_result = 'PurchaseItem(id=1,barcode=,purchase_order=1,' \
+                          'quantity=1.0,total_price=2.0)'
         purchase_item = PurchaseItem.objects.create(
             purchase_order=self.created_purchase_order,
             quantity=1.0,
@@ -356,7 +362,7 @@ class PurchasePaymentMethodTest(TestCase):
     def test_str(self):
         """ Test PurchasePaymentMethod __str__ method """
 
-        expected_result = '1'
+        expected_result = 'PurchasePaymentMethod 1 - order 1'
         purchase_payment_method = PurchasePaymentMethod.objects.create(
             purchase_order=self.purchase_order,
             payment_method=self.payment_method,
@@ -367,7 +373,8 @@ class PurchasePaymentMethodTest(TestCase):
     def test_repr(self):
         """ Test PurchasePaymentMethod __repr__ method """
 
-        expected_result = '1'
+        expected_result = 'PurchasePaymentMethod(id=1,purchase_order=1,' \
+                          'payment_method=Cash,value=2.0)'
         purchase_payment_method = PurchasePaymentMethod.objects.create(
             purchase_order=self.purchase_order,
             payment_method=self.payment_method,

@@ -24,11 +24,11 @@ class Category(models.Model):
         verbose_name = ugettext_lazy('Category')
         verbose_name_plural = ugettext_lazy('Categories')
 
-    def __repr__(self):
-        return self.description
-
     def __str__(self):
-        return self.description
+        return 'Category - {}'.format(self.description)
+
+    def __repr__(self):
+        return ('Category(description={})').format(self.description)
 
 
 class ProductBase(models.Model):
@@ -55,11 +55,18 @@ class ProductBase(models.Model):
 
         abstract = True
 
-    def __repr__(self):
-        return self.title
-
     def __str__(self):
-        return self.title
+        return 'ProductBase - {}'.format(self.title)
+
+    def __repr__(self):
+        return ('ProductBase(barcode={},title={},description={},'
+                'price={},category={})').format(
+            self.barcode,
+            self.title,
+            self.description,
+            self.price,
+            self.category
+        )
 
 
 class Product(ProductBase):
@@ -88,6 +95,20 @@ class Product(ProductBase):
         """
         return reverse('website:product-detail', kwargs={'slug': self.slug})
 
+    def __str__(self):
+        return 'Product - {}'.format(self.title)
+
+    def __repr__(self):
+        return ('Product(barcode={},title={},description={},'
+                'price={},category={},slug={})').format(
+            self.barcode,
+            self.title,
+            self.description,
+            self.price,
+            self.category.description,
+            self.slug
+        )
+
 
 def pre_save_product_receiver(sender, instance, *args, **kwargs):
     """ Generates the slug field before saving the product instance """
@@ -111,11 +132,11 @@ class PaymentMethod(models.Model):
         verbose_name = ugettext_lazy('PaymentMethod')
         verbose_name_plural = ugettext_lazy('PaymentMethods')
 
-    def __repr__(self):
-        return self.description
-
     def __str__(self):
-        return self.description
+        return 'PaymentMethod - {}'.format(self.description)
+
+    def __repr__(self):
+        return ('PaymentMethod(description={})').format(self.description)
 
 
 class PurchaseOrder(models.Model):
@@ -135,11 +156,16 @@ class PurchaseOrder(models.Model):
         verbose_name = ugettext_lazy('PurchaseOrder')
         verbose_name_plural = ugettext_lazy('PurchaseOrders')
 
-    def __repr__(self):
-        return '{} - {}'.format(str(self.id), self.user.username)
-
     def __str__(self):
-        return '{} - {}'.format(str(self.id), self.user.username)
+        return 'PurchaseOrder - {}'.format(self.id)
+
+    def __repr__(self):
+        return ('PurchaseOrder(id={},timestamp={},user={},cart={})').format(
+            self.id,
+            self.timestamp,
+            self.user,
+            self.cart
+        )
 
 
 class PurchaseItem(ProductBase):
@@ -168,11 +194,21 @@ class PurchaseItem(ProductBase):
         verbose_name = ugettext_lazy('PurchaseItem')
         verbose_name_plural = ugettext_lazy('PurchaseItems')
 
-    def __repr__(self):
-        return str(self.id)
-
     def __str__(self):
-        return str(self.id)
+        return 'PurchaseItem {} - order {}'.format(
+            self.id, self.purchase_order.id
+        )
+
+    def __repr__(self):
+        return ('PurchaseItem(id={},barcode={},purchase_order={},'
+                'quantity={},total_price={})').format(
+            self.id,
+            self.barcode,
+            self.purchase_order.id,
+            self.quantity,
+            self.total_price,
+            self.slug
+        )
 
 
 class PurchasePaymentMethod(models.Model):
@@ -198,8 +234,16 @@ class PurchasePaymentMethod(models.Model):
         verbose_name = ugettext_lazy('PurchasePaymentMethod')
         verbose_name_plural = ugettext_lazy('PurchasePaymentMethods')
 
-    def __repr__(self):
-        return str(self.id)
-
     def __str__(self):
-        return str(self.id)
+        return 'PurchasePaymentMethod {} - order {}'.format(
+            self.id, self.purchase_order.id
+        )
+
+    def __repr__(self):
+        return ('PurchasePaymentMethod(id={},purchase_order={},'
+                'payment_method={},value={})').format(
+            self.id,
+            self.purchase_order.id,
+            self.payment_method.description,
+            self.value
+        )
