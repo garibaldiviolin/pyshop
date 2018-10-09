@@ -2,15 +2,17 @@
 
 import os
 
+from django.contrib.auth.models import User
 from django.test import TestCase
 from rest_framework import serializers
 
 from pyshop.settings import BASE_DIR
-from website.models import Category, Product, PaymentMethod
+from website.models import Category, Product, PaymentMethod, PurchaseOrder
 from ..serializers import (
     CategorySerializer,
     ProductSerializer,
-    PaymentMethodSerializer
+    PaymentMethodSerializer,
+    PurchaseOrderSerializer,
 )
 
 
@@ -220,3 +222,142 @@ class PaymentMethodSerializerTest(TestCase):
             serializer.is_valid(raise_exception=True)
         self.assertIn('description', serializer.errors.keys())
         self.assertIn('blank', str(serializer.errors.values()))
+
+
+class PurchaseOrderSerializerTest(TestCase):
+    """ Test case for the PurchaseOrder model serializer """
+
+    def setUp(self):
+        self.user = User.objects.get_or_create(username='testuser')[0]
+        self.purchase_order = PurchaseOrder.objects.create(
+            timestamp='2018-10-09T01:15:00Z', user=self.user, cart=False
+        )
+        self.serializer = PurchaseOrderSerializer(instance=self.purchase_order)
+        self.json = {
+            'id': 1,
+            'timestamp': '2018-10-09T01:15:00Z',
+            'cart': True,
+            'user': self.user.id
+        }
+
+    def test_id_content(self):
+        """ Test id field value """
+
+        self.assertEqual(
+            self.purchase_order.id,
+            self.serializer.data['id']
+        )
+
+    def test_timestamp_content(self):
+        """ Test timestamp field value """
+
+        self.assertEqual(
+            self.purchase_order.timestamp,
+            self.serializer.data['timestamp']
+        )
+
+    def test_invalid_timestamp(self):
+        """ Test invalid timestamp field value """
+
+        data = self.json
+        data.update({'timestamp': 'AA'})
+        serializer = PurchaseOrderSerializer(data=data)
+
+        with self.assertRaises(serializers.ValidationError):
+            serializer.is_valid(raise_exception=True)
+        self.assertIn('timestamp', serializer.errors.keys())
+        self.assertIn(
+            'Datetime has wrong format.',
+            str(serializer.errors.values())
+        )
+
+    def test_blank_timestamp(self):
+        """ Test blank timestamp field value """
+
+        data = self.json
+        data.update({'timestamp': ''})
+        serializer = PurchaseOrderSerializer(data=data)
+
+        with self.assertRaises(serializers.ValidationError):
+            serializer.is_valid(raise_exception=True)
+        self.assertIn('timestamp', serializer.errors.keys())
+        self.assertIn(
+            'Datetime has wrong format.',
+            str(serializer.errors.values())
+        )
+
+    def test_cart_content(self):
+        """ Test cart field value """
+
+        self.assertEqual(
+            self.purchase_order.cart,
+            self.serializer.data['cart']
+        )
+
+    def test_invalid_cart(self):
+        """ Test invalid cart field value """
+
+        data = self.json
+        data.update({'cart': 'AA'})
+        serializer = PurchaseOrderSerializer(data=data)
+
+        with self.assertRaises(serializers.ValidationError):
+            serializer.is_valid(raise_exception=True)
+        self.assertIn('cart', serializer.errors.keys())
+        self.assertIn(
+            'is not a valid boolean.',
+            str(serializer.errors.values())
+        )
+
+    def test_blank_cart(self):
+        """ Test blank cart field value """
+
+        data = self.json
+        data.update({'cart': ''})
+        serializer = PurchaseOrderSerializer(data=data)
+
+        with self.assertRaises(serializers.ValidationError):
+            serializer.is_valid(raise_exception=True)
+        self.assertIn('cart', serializer.errors.keys())
+        self.assertIn(
+            'is not a valid boolean.',
+            str(serializer.errors.values())
+        )
+
+    def test_user_content(self):
+        """ Test user field value """
+
+        self.assertEqual(
+            self.purchase_order.user.id,
+            self.serializer.data['user']
+        )
+
+    def test_invalid_user(self):
+        """ Test invalid user field value """
+
+        data = self.json
+        data.update({'user': 12})
+        serializer = PurchaseOrderSerializer(data=data)
+
+        with self.assertRaises(serializers.ValidationError):
+            serializer.is_valid(raise_exception=True)
+        self.assertIn('user', serializer.errors.keys())
+        self.assertIn(
+            'Invalid pk',
+            str(serializer.errors.values())
+        )
+
+    def test_blank_user(self):
+        """ Test blank user field value """
+
+        data = self.json
+        data.update({'user': ''})
+        serializer = PurchaseOrderSerializer(data=data)
+
+        with self.assertRaises(serializers.ValidationError):
+            serializer.is_valid(raise_exception=True)
+        self.assertIn('user', serializer.errors.keys())
+        self.assertIn(
+            'null',
+            str(serializer.errors.values())
+        )
