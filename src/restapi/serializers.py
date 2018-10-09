@@ -2,7 +2,7 @@
 
 from rest_framework import serializers
 
-from website.models import Category, Product, PaymentMethod
+from website.models import Category, Product, PaymentMethod, PurchaseOrder
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -32,4 +32,14 @@ class PaymentMethodSerializer(serializers.ModelSerializer):
         """ PaymentMethodSerializer's Meta class """
 
         model = PaymentMethod
+        fields = '__all__'
+
+
+class PurchaseOrderSerializer(serializers.ModelSerializer):
+    """ Serializer for the PurchaseOrder model """
+
+    class Meta:
+        """ PurchaseOrderSerializer's Meta class """
+
+        model = PurchaseOrder
         fields = '__all__'

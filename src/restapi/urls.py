@@ -5,7 +5,8 @@ from django.urls import path
 from .views import (
     CategoryCreateView,
     ProductCreateView,
-    PaymentMethodCreateView
+    PaymentMethodCreateView,
+    PurchaseOrderCreateView
 )
 
 
@@ -26,5 +27,10 @@ urlpatterns = [
         'v1/payment-methods/',
         PaymentMethodCreateView.as_view(),
         name='payment-methods'
+    ),
+    path(
+        'v1/purchase-orders/',
+        PurchaseOrderCreateView.as_view(),
+        name='purchase-orders'
     ),
 ]

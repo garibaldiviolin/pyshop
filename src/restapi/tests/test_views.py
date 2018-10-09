@@ -6,7 +6,7 @@ from django.urls import reverse
 from rest_framework import test, status
 
 from pyshop.settings import BASE_DIR
-from website.models import Category, Product, PaymentMethod
+from website.models import Category, Product, PaymentMethod, PurchaseOrder
 
 
 class CategoryViewTest(test.APITransactionTestCase):
@@ -355,3 +355,27 @@ class PaymentMethodCreateViewTest(test.APITransactionTestCase):
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(PaymentMethod.objects.count(), 0)
+
+
+class PurchaseOrderViewTest(test.APITransactionTestCase):
+    """ Test case for the PurchaseOrder Create view """
+
+    def setUp(self):
+        self.purchase_order = {
+            "id": 1,
+            "timestamp": "2018-10-09T01:15:00Z",
+            "cart": True,
+            "user": 1
+        }
+
+    def test_resource_creation(self):
+        """ Test resource (instance) creation in products endpoint """
+
+        response = self.client.post(
+            reverse('restapi:purchase-orders'),
+            self.purchase_order,
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(PurchaseOrder.objects.count(), 1)
