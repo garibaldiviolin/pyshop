@@ -87,6 +87,14 @@ class ProductViewTest(test.APITransactionTestCase):
             'category': self.category_id
         }
 
+    def remove_uploaded_image(self, barcode):
+        ''' Remove the image uploaded after tests '''
+
+        uploaded_image_path = Product.objects.get(
+            barcode=barcode
+        ).image.path
+        os.remove(uploaded_image_path)
+
     def test_resource_creation(self):
         """ Test resource (instance) creation in products endpoint """
 
@@ -99,11 +107,7 @@ class ProductViewTest(test.APITransactionTestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Product.objects.count(), 1)
 
-        # remove the image uploaded after tests
-        uploaded_image_path = Product.objects.get(
-            barcode=self.product['barcode']
-        ).image.path
-        os.remove(uploaded_image_path)
+        self.remove_uploaded_image(self.product['barcode'])
 
     def test_blank_barcode(self):
         """ Test resource (instance) creation with blank barcode """
