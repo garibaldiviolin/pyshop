@@ -2,6 +2,7 @@
 
 import os
 
+from django.contrib.auth.models import User
 from django.urls import reverse
 from rest_framework import test, status
 
@@ -361,11 +362,13 @@ class PurchaseOrderViewTest(test.APITransactionTestCase):
     """ Test case for the PurchaseOrder Create view """
 
     def setUp(self):
+        self.user = User.objects.get_or_create(username='testuser')[0]
+
         self.purchase_order = {
             "id": 1,
             "timestamp": "2018-10-09T01:15:00Z",
             "cart": True,
-            "user": 1
+            "user": self.user.id
         }
 
     def test_resource_creation(self):
