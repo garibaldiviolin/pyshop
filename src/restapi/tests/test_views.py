@@ -386,3 +386,129 @@ class PurchaseOrderViewTest(test.APITransactionTestCase):
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(PurchaseOrder.objects.count(), 1)
+
+    def test_blank_timestamp(self):
+        """ Test resource (instance) creation with blank timestamp """
+
+        self.purchase_order.update({'timestamp': ''})
+
+        response = self.client.post(
+            reverse('restapi:purchase-orders'),
+            self.purchase_order,
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(PurchaseOrder.objects.count(), 0)
+
+    def test_invalid_timestamp(self):
+        """ Test resource (instance) creation with invalid timestamp """
+
+        self.purchase_order.update({'timestamp': 'AAA'})
+
+        response = self.client.post(
+            reverse('restapi:purchase-orders'),
+            self.purchase_order,
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(PurchaseOrder.objects.count(), 0)
+
+    def test_without_timestamp(self):
+        """ Test resource (instance) creation without timestamp """
+
+        del self.purchase_order['timestamp']
+
+        response = self.client.post(
+            reverse('restapi:purchase-orders'),
+            self.purchase_order,
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(PurchaseOrder.objects.count(), 0)
+
+    def test_blank_cart(self):
+        """ Test resource (instance) creation with blank cart """
+
+        self.purchase_order.update({'cart': ''})
+
+        response = self.client.post(
+            reverse('restapi:purchase-orders'),
+            self.purchase_order,
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(PurchaseOrder.objects.count(), 0)
+
+    def test_invalid_cart(self):
+        """ Test resource (instance) creation with invalid cart """
+
+        self.purchase_order.update({'cart': 'AAA'})
+
+        response = self.client.post(
+            reverse('restapi:purchase-orders'),
+            self.purchase_order,
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(PurchaseOrder.objects.count(), 0)
+
+    def test_without_cart(self):
+        """ Test resource (instance) creation without cart """
+
+        del self.purchase_order['cart']
+
+        response = self.client.post(
+            reverse('restapi:purchase-orders'),
+            self.purchase_order,
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(PurchaseOrder.objects.count(), 0)
+
+    def test_blank_user(self):
+        """ Test resource (instance) creation with blank user """
+
+        self.purchase_order.update({'user': ''})
+
+        response = self.client.post(
+            reverse('restapi:purchase-orders'),
+            self.purchase_order,
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(PurchaseOrder.objects.count(), 0)
+
+    def test_invalid_user(self):
+        """ Test resource (instance) creation with invalid user """
+
+        self.purchase_order.update({'user': 5})
+
+        response = self.client.post(
+            reverse('restapi:purchase-orders'),
+            self.purchase_order,
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(PurchaseOrder.objects.count(), 0)
+
+    def test_without_user(self):
+        """ Test resource (instance) creation without user """
+
+        del self.purchase_order['user']
+
+        response = self.client.post(
+            reverse('restapi:purchase-orders'),
+            self.purchase_order,
+            format='json'
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(PurchaseOrder.objects.count(), 0)
