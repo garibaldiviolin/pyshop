@@ -2,12 +2,19 @@
 
 from rest_framework.generics import CreateAPIView
 
-from website.models import Category, Product, PaymentMethod, PurchaseOrder
+from website.models import (
+    Category,
+    Product,
+    PaymentMethod,
+    PurchaseOrder,
+    PurchaseItem
+)
 from .serializers import (
     CategorySerializer,
     ProductSerializer,
     PaymentMethodSerializer,
-    PurchaseOrderSerializer
+    PurchaseOrderSerializer,
+    PurchaseItemSerializer
 )
 
 
@@ -40,4 +47,12 @@ class PurchaseOrderCreateView(CreateAPIView):
 
     queryset = PurchaseOrder.objects.all()
     serializer_class = PurchaseOrderSerializer
+    lookup_field = 'id'
+
+
+class PurchaseItemCreateView(CreateAPIView):
+    """ Create view for PurchaseItem objects """
+
+    queryset = PurchaseItem.objects.all()
+    serializer_class = PurchaseItemSerializer
     lookup_field = 'id'
