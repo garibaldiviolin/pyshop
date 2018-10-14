@@ -28,3 +28,10 @@ class RESTAPIURLsTest(TestCase):
             reverse('restapi:purchase-orders'),
             '/api/v1/purchase-orders/'
         )
+
+    def test_purchase_items_url(self):
+        """ Test purchase items url """
+        self.assertEqual(
+            reverse('restapi:purchase-items'),
+            '/api/v1/purchase-items/'
+        )
