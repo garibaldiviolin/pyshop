@@ -6,7 +6,8 @@ from .views import (
     CategoryCreateView,
     ProductCreateView,
     PaymentMethodCreateView,
-    PurchaseOrderCreateView
+    PurchaseOrderCreateView,
+    PurchaseItemCreateView
 )
 
 
@@ -32,5 +33,10 @@ urlpatterns = [
         'v1/purchase-orders/',
         PurchaseOrderCreateView.as_view(),
         name='purchase-orders'
+    ),
+    path(
+        'v1/purchase-items/',
+        PurchaseItemCreateView.as_view(),
+        name='purchase-items'
     ),
 ]
