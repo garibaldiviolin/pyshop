@@ -2,7 +2,13 @@
 
 from rest_framework import serializers
 
-from website.models import Category, Product, PaymentMethod, PurchaseOrder
+from website.models import (
+    Category,
+    Product,
+    PaymentMethod,
+    PurchaseOrder,
+    PurchaseItem
+)
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -42,4 +48,14 @@ class PurchaseOrderSerializer(serializers.ModelSerializer):
         """ PurchaseOrderSerializer's Meta class """
 
         model = PurchaseOrder
+        fields = '__all__'
+
+
+class PurchaseItemSerializer(serializers.ModelSerializer):
+    """ Serializer for the PurchaseItem model """
+
+    class Meta:
+        """ PurchaseItemSerializer's Meta class """
+
+        model = PurchaseItem
         fields = '__all__'
