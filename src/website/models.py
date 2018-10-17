@@ -196,8 +196,7 @@ class PurchaseItem(ProductBase):
                 self.barcode,
                 self.purchase_order.id,
                 self.quantity,
-                self.total_price,
-                self.slug
+                self.total_price
             )
         )
 
