@@ -371,7 +371,7 @@ class PurchaseOrderSerializerTest(TestCase):
         )
 
 
-class PurchaseItemSerializerTest(TestCase):
+class PurchaseItemSerializerTest(TestCase):  # pylint: disable=R0902
     """ Test case for the PurchaseItem model serializer """
 
     def setUp(self):
