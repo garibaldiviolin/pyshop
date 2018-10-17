@@ -149,6 +149,8 @@ class ProductViewTest(test.APITransactionTestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Product.objects.count(), 1)
 
+        self.remove_uploaded_image(self.product['barcode'])
+
         response = self.client.post(
             reverse('restapi:products'),
             self.product,
