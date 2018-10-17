@@ -1,6 +1,7 @@
 """ This module tests restapi app serializers """
 
 import os
+from shutil import copyfile
 
 from django.contrib.auth.models import User
 from django.test import TestCase
@@ -374,10 +375,16 @@ class PurchaseItemSerializerTest(TestCase):
     """ Test case for the PurchaseItem model serializer """
 
     def setUp(self):
-        self.image_path = os.path.join(
+        self.origin_path = os.path.join(
             BASE_DIR, 'website/fixtures/', 'sample_image.jpg'
         )
-        self.image = open(self.image_path, 'rb')
+        self.destination_path = os.path.join(
+            BASE_DIR, 'media/', 'sample_image.jpg'
+        )
+
+        copyfile(self.origin_path, self.destination_path)
+
+        self.image = open(self.origin_path, 'rb')
 
         self.category = Category.objects.create(description='Furnitures')
 
@@ -385,7 +392,7 @@ class PurchaseItemSerializerTest(TestCase):
             barcode='789789789',
             title='Mattress',
             description='Sleep Mattress',
-            image=self.image,
+            image=self.destination_path,
             price=123.000,
             category=self.category
         )
@@ -399,7 +406,7 @@ class PurchaseItemSerializerTest(TestCase):
             id=1,
             title=self.product.title,
             description=self.product.description,
-            image=self.product.image,
+            image=self.destination_path,
             price=self.product.price,
             barcode=self.product.barcode,
             quantity=1.000,
