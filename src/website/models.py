@@ -86,14 +86,16 @@ class Product(ProductBase):
         return 'Product - {}'.format(self.title)
 
     def __repr__(self):
-        return ('Product(barcode={},title={},description={},'
-                'price={},category={},slug={})').format(
-            self.barcode,
-            self.title,
-            self.description,
-            self.price,
-            self.category.description,
-            self.slug
+        return (
+            'Product(barcode={},title={},description={},'
+            'price={},category={},slug={})'.format(
+                self.barcode,
+                self.title,
+                self.description,
+                self.price,
+                self.category.description,
+                self.slug
+            )
         )
 
 
@@ -187,14 +189,16 @@ class PurchaseItem(ProductBase):
         )
 
     def __repr__(self):
-        return ('PurchaseItem(id={},barcode={},purchase_order={},'
-                'quantity={},total_price={})').format(
-            self.id,
-            self.barcode,
-            self.purchase_order.id,
-            self.quantity,
-            self.total_price,
-            self.slug
+        return (
+            'PurchaseItem(id={},barcode={},purchase_order={},'
+            'quantity={},total_price={})'.format(
+                self.id,
+                self.barcode,
+                self.purchase_order.id,
+                self.quantity,
+                self.total_price,
+                self.slug
+            )
         )
 
 
@@ -227,10 +231,12 @@ class PurchasePaymentMethod(models.Model):
         )
 
     def __repr__(self):
-        return ('PurchasePaymentMethod(id={},purchase_order={},'
-                'payment_method={},value={})').format(
-            self.id,
-            self.purchase_order.id,
-            self.payment_method.description,
-            self.value
+        return (
+            'PurchasePaymentMethod(id={},purchase_order={},'
+            'payment_method={},value={})'.format(
+                self.id,
+                self.purchase_order.id,
+                self.payment_method.description,
+                self.value
+            )
         )
