@@ -548,3 +548,8 @@ class PurchaseItemSerializerTest(TestCase):
             exception_serializer.is_valid(raise_exception=True)
         self.assertIn('category', exception_serializer.errors.keys())
         self.assertIn('null', str(exception_serializer.errors.values()))
+
+    def tearDown(self):
+        """ Remove the image uploaded after tests """
+
+        os.remove(self.destination_path)
